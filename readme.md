@@ -13,4 +13,4 @@ This project aims to develop a Flutter application that is collaborative notes w
 | Name            | ID          |
 |-------------- |-------------|
 | Samrawit Kahsay | UGR/2271/14   |
-| Dagmawi Eiias   | UGR//14  |
+| Dagmawi Elias   | UGR//14  |
