@@ -5,6 +5,12 @@ This project aims to develop a Flutter application that is collaborative notes w
 - Authentication
 - Authorization
 - User Registration
-- Role Assignment
+- Role Assignment(user and admin)
 - Notes feature with crud abilities
 - chat feature with crud abilities
+
+
+| Name            | ID          |
+|-------------- |-------------|
+| Samrawit Kahsay | UGR/2271/14   |
+| Dagmawi Eiias   | UGR//14  |
