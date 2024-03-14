@@ -1,13 +1,11 @@
-# Flutter 2024 Project
+# Echo notes app
 
-This project aims to develop a Flutter application that is collaborative notes with chat functionality:
+This project aims to develop a Flutter application that is collaborative notes with chat functionality with features:
 
-- Authentication
-- Authorization
-- User Registration
-- Role Assignment(user and admin)
-- Notes feature with crud abilities
-- chat feature with crud abilities
+- Authentication and authorization
+- User Registration and role assignment
+- Note feature: users will have the ability to create, edit, read and delete the notes
+- chat feature: users will have the ability to create chat with other users, read the chats edit their chats and delete them too.
 
 
 | Name            | ID          |
