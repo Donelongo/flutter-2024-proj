@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './others.dart';
+import './addnotes.dart';
 
 class NotesPage extends StatelessWidget {
   const NotesPage({super.key});
@@ -34,7 +35,10 @@ class NotesPage extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Handle floating action button press
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>const AddNote()),
+          );
         },
         backgroundColor: Colors.blue,
         child: const Icon(Icons.add),
