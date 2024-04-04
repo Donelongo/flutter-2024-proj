@@ -8,45 +8,54 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
+  final titleController = TextEditingController();
+  final bodyController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Note'),
-      ),
-
-
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextFormField(
-              style: const TextStyle(
-                fontSize: 28
+    return Theme(
+      data: ThemeData(brightness: Brightness.dark),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Add Note',
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: titleController,
+                style: const TextStyle(fontSize: 28),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Title",
                 ),
-              decoration: const InputDecoration(
-                labelText: 'Title',
-                border: OutlineInputBorder(),
+                maxLines: null,
               ),
-            ),
-
-
-            const SizedBox(height: 20),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Content',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: bodyController,
+                style: const TextStyle(fontSize: 18),
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Enter your note here...",
+                ),
+                maxLines: null,
               ),
-              maxLines: 10,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Handle save button press
-              },
-              child: const Text('Save'),
-            ),
-          ],
+              const Spacer(),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(Icons.save),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,12 +6,12 @@ class NotesPage extends StatelessWidget {
   const NotesPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
+Widget build(BuildContext context) {
+  return Theme(
+    data: ThemeData(brightness: Brightness.dark),
+    child: Scaffold(
       appBar: AppBar(
         title: const Text('Notes'),
-        backgroundColor: Colors.blue,
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -40,10 +40,10 @@ class NotesPage extends StatelessWidget {
             MaterialPageRoute(builder: (context) =>const AddNote()),
           );
         },
-        backgroundColor: Colors.blue,
-        child: const Icon(Icons.add),
+          backgroundColor: Colors.grey[700],
+          child: const Icon(Icons.add,
+          color: Colors.white,),
       ),
-
 
       bottomNavigationBar: BottomAppBar(
         child: Row(
@@ -68,6 +68,7 @@ class NotesPage extends StatelessWidget {
           ],
         ),
       ),
+    ),
     );
   }
 
@@ -162,7 +163,6 @@ class NoteDetailsDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       elevation: 0,
-      backgroundColor: Colors.transparent,
       child: contentBox(context),
     );
   }
@@ -172,7 +172,6 @@ class NoteDetailsDialog extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(

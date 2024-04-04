@@ -29,42 +29,45 @@ class ViewNotesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('View Notes'),
-      ),
-      body: ListView.builder(
-        itemCount: notes.length,
-        itemBuilder: (context, index) {
-          final note = notes[index];
-          return ListTile(
-            title: Text(note.title),
-            subtitle: Text(note.content),
-          );
-        },
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              onPressed: () {
-                // Navigate to NotesPage
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.notes),
-            ),
-            IconButton(
-              onPressed: () {
-                // Navigate to ViewOtherNotesPage
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ViewOtherNotesPage()),
-                );
-              },
-              icon: const Icon(Icons.people_alt),
-            ),
-          ],
+    return Theme(
+      data: ThemeData(brightness: Brightness.dark),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('View Notes'),
+        ),
+        body: ListView.builder(
+          itemCount: notes.length,
+          itemBuilder: (context, index) {
+            final note = notes[index];
+            return ListTile(
+              title: Text(note.title),
+              subtitle: Text(note.content),
+            );
+          },
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                onPressed: () {
+                  // Navigate to NotesPage
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.notes),
+              ),
+              IconButton(
+                onPressed: () {
+                  // Navigate to ViewOtherNotesPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ViewOtherNotesPage()),
+                  );
+                },
+                icon: const Icon(Icons.people_alt),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -76,46 +79,49 @@ class ViewOtherNotesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Other Notes'),
-      ),
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return OthersNotesCard(
-            title: 'Note ${index + 1}',
-            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            onTap: () {
-              _showNoteDetails(context, 'Note ${index + 1}');
-            },
-            // onEdit: () {
-            //   _editNote(context, 'Note ${index + 1}');
-            // },
-            // onDelete: () {
-            //   _deleteNote(context, 'Note ${index + 1}');
-            // },
-          );
-        },
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              onPressed: () {
-                // Navigate to NotesPage
-                Navigator.pop(context);
+    return Theme(
+      data: ThemeData(brightness: Brightness.dark),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Other's Notes"),
+        ),
+        body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return OthersNotesCard(
+              title: 'Note ${index + 1}',
+              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+              onTap: () {
+                _showNoteDetails(context, 'Note ${index + 1}');
               },
-              icon: const Icon(Icons.notes),
-            ),
-            IconButton(
-              onPressed: () {
-                // Do nothing, already on this page
-              },
-              icon: const Icon(Icons.people_alt),
-            ),
-          ],
+              // onEdit: () {
+              //   _editNote(context, 'Note ${index + 1}');
+              // },
+              // onDelete: () {
+              //   _deleteNote(context, 'Note ${index + 1}');
+              // },
+            );
+          },
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                onPressed: () {
+                  // Navigate to NotesPage
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.notes),
+              ),
+              IconButton(
+                onPressed: () {
+                  // Do nothing, already on this page
+                },
+                icon: const Icon(Icons.people_alt),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -135,7 +141,6 @@ class OthersNoteDetailsDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
       ),
       elevation: 0,
-      backgroundColor: Colors.transparent,
       child: contentBox(context),
     );
   }
@@ -145,7 +150,6 @@ class OthersNoteDetailsDialog extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(

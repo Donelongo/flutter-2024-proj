@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/screens/home.dart';
@@ -8,7 +7,7 @@ import 'package:digital_notebook/screens/signup.dart';
 import 'package:digital_notebook/screens/notes.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,17 +16,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        brightness: Brightness.dark
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomePage(),
-        '/admin': (context) => AdminPage(),
-        '/login': (context) => LoginPage(),
-        '/signup': (context) => SignupPage(),
-        '/notes': (context) => NotesPage(),
+        '/': (context) => const HomePage(),
+        '/admin': (context) => const AdminPage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignupPage(),
+        '/notes': (context) => const NotesPage(),
       },
     );
   }
