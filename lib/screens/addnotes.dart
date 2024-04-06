@@ -18,7 +18,7 @@ class _AddNoteState extends State<AddNote> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Add Noteeeeee',
+            'Add Note',
           ),
         ),
         body: Padding(
