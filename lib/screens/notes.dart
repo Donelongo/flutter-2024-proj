@@ -60,7 +60,7 @@ Widget build(BuildContext context) {
     // Navigate to 'other.dart'
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>const ViewOtherNotesPage()), // Use const OtherPage()
+      MaterialPageRoute(builder: (context) =>const ViewOtherNotesPage()),
     );
   },
   icon: const Icon(Icons.people_alt),
