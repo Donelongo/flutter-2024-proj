@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:digital_notebook/screens/admin/admin.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -9,7 +9,10 @@ class HomePage extends StatelessWidget {
       data: ThemeData(brightness: Brightness.dark),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          automaticallyImplyLeading: false,
+          title: const Center(
+            child: Text('Home'),
+          ),
         ),
         body: Container(
           decoration: const BoxDecoration(
@@ -28,7 +31,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const AdminLogsPage()),
+                      MaterialPageRoute(builder: (context) => const AdminPage()),
                     );
                   },
                   child: const Text('Admin'),

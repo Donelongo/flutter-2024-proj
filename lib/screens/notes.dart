@@ -11,8 +11,31 @@ Widget build(BuildContext context) {
     data: ThemeData(brightness: Brightness.dark),
     child: Scaffold(
       appBar: AppBar(
-        title: const Text('Notes'),
+        title: const Text('My Notes'),
+        actions: <Widget>[
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/login');
+          },
+          child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        child: Center(
+          child: Text(
+            "Logout",
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+          ),
+        )
       ),
+    ),
+  ),
+  IconButton(
+            onPressed: () => Navigator.pushNamed(context, '/login'),
+            icon: const Icon(Icons.logout),
+          )
+  ],
+),
       body: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {

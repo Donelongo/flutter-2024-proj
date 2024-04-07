@@ -5,39 +5,46 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Login'),
-        ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Email',
+    // ignore: deprecated_member_use
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushNamed(context, '/');
+        return false; // Prevents the default behavior
+      },
+      child: Theme(
+        data: ThemeData(brightness: Brightness.dark),
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Login'),
+          ),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  const TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Password',
+                    const SizedBox(height: 20),
+                    const TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                      ),
+                      obscureText: true,
                     ),
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Login'),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Login'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
