@@ -10,7 +10,12 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Center(
-            child: Text('Home'),
+            child: Text('Digital Notebook',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24
+              ),
+            )
           ),
         ),
         body: Container(

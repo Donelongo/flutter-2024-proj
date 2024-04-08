@@ -10,7 +10,10 @@ class NotesPage extends StatelessWidget {
 Widget build(BuildContext context) {
   return Scaffold(
       appBar: AppBar(
-        title: const Text('My Notes'),
+        title: const Text('My Notes',
+        style: TextStyle(
+          fontSize: 20,
+        )),
         actions: <Widget>[
         GestureDetector(
           onTap: () {
@@ -59,31 +62,36 @@ Widget build(BuildContext context) {
           color: Colors.white,),
       ),
 
-      bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              onPressed: () {
-                // Handle my notes button press
-              },
-              icon: const Icon(Icons.notes),
-            ),
-            IconButton(
-  onPressed: () async {
-    // Navigate to 'other.dart'
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>const ViewOtherNotesPage()),
-    );
-  },
-  icon: const Icon(Icons.people_alt),
-),
-          ],
-        ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+        iconTheme: const IconThemeData(color: Colors.white),
+    ),
+        child: BottomAppBar(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      // Handle my notes button press
+                    },
+                    icon: const Icon(Icons.notes),
+                  ),
+                  IconButton(
+        onPressed: () async {
+          // Navigate to 'other.dart'
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) =>const ViewOtherNotesPage()),
+          );
+        },
+        icon: const Icon(Icons.people_alt),
       ),
-    );
-  }
+                ],
+              ),
+            ),
+      ),
+          );
+        }
 
   void _showNoteDetails(BuildContext context, String noteTitle) {
     showDialog(

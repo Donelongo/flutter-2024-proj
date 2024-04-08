@@ -78,7 +78,11 @@ class ViewOtherNotesPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
         appBar: AppBar(
-          title: const Text("Other's Notes"),
+          title: const Text("Other's Notes",
+          style: TextStyle(
+          fontSize: 20,
+        )
+        ),
         ),
         body: ListView.builder(
           itemCount: 10,

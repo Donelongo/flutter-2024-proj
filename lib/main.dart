@@ -18,8 +18,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       themeMode: ThemeMode.dark,
       theme: ThemeData(
-        brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.black,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          titleTextStyle: TextStyle(color: Colors.white),
+          iconTheme: IconThemeData(color: Colors.white),
+
+        ),
+
+        textTheme: const TextTheme(
+          // ignore: deprecated_member_use
+          bodyText1: TextStyle(color: Colors.white),
+          // ignore: deprecated_member_use
+          bodyText2: TextStyle(color: Colors.white),
+        ),
+
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(color: Colors.white),
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.black,
+            selectedItemColor: Colors.grey,
+            unselectedItemColor: Colors.white,
+          ),
+          bottomAppBarTheme: const BottomAppBarTheme(color: Colors.black),
       ),
       initialRoute: '/',
       routes: {
