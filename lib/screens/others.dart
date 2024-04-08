@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-// Model class representing a note
 class Note {
   final String title;
   final String content;
@@ -29,9 +27,8 @@ class ViewNotesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text('View Notes'),
         ),
@@ -69,7 +66,6 @@ class ViewNotesPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }
@@ -79,9 +75,8 @@ class ViewOtherNotesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.black,
         appBar: AppBar(
           title: const Text("Other's Notes"),
         ),
@@ -89,6 +84,7 @@ class ViewOtherNotesPage extends StatelessWidget {
           itemCount: 10,
           itemBuilder: (context, index) {
             return OthersNotesCard(
+
               title: 'Note ${index + 1}',
               content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
               onTap: () {
@@ -123,7 +119,6 @@ class ViewOtherNotesPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }

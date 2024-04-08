@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/password.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -11,9 +12,7 @@ class LoginPage extends StatelessWidget {
         Navigator.pushNamed(context, '/');
         return false; // Prevents the default behavior
       },
-      child: Theme(
-        data: ThemeData(brightness: Brightness.dark),
-        child: Scaffold(
+      child: Scaffold(
           appBar: AppBar(
             title: const Text('Login'),
           ),
@@ -32,15 +31,13 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                      ),
-                      obscureText: true,
+                    const PasswordWidget(
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/notes');
+                      },
                       child: const Text('Login'),
                     ),
                   ],
@@ -49,7 +46,6 @@ class LoginPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

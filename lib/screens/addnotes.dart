@@ -13,9 +13,7 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text(
             'Add Note',
@@ -57,7 +55,6 @@ class _AddNoteState extends State<AddNote> {
             ],
           ),
         ),
-      ),
     );
   }
 }

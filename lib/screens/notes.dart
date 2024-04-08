@@ -7,12 +7,11 @@ class NotesPage extends StatelessWidget {
 
   @override
 Widget build(BuildContext context) {
-  return Theme(
-    data: ThemeData(brightness: Brightness.dark),
-    child: Scaffold(
+  return Scaffold(
       appBar: AppBar(
         title: const Text('My Notes'),
         actions: <Widget>[
+
         GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, '/login');
@@ -30,10 +29,7 @@ Widget build(BuildContext context) {
       ),
     ),
   ),
-  IconButton(
-            onPressed: () => Navigator.pushNamed(context, '/login'),
-            icon: const Icon(Icons.logout),
-          )
+
   ],
 ),
       body: ListView.builder(
@@ -91,7 +87,6 @@ Widget build(BuildContext context) {
           ],
         ),
       ),
-    ),
     );
   }
 
