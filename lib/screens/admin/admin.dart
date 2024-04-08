@@ -1,140 +1,199 @@
 import 'package:flutter/material.dart';
+import 'add_activity_dialog.dart';
+import './others.dart';
+import './notes.dart';
 
-// Model class representing activity log data
-class ActivityLog {
-  final String id;
-  final String message;
-
-  ActivityLog({required this.id, required this.message});
+void main() {
+  runApp(AdminPage());
 }
 
-class AdminPage extends StatefulWidget {
-  const AdminPage({super.key});
-
+class AdminPage extends StatelessWidget {
   @override
-  _AdminPageState createState() => _AdminPageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Activity Logs',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: AdminHomePage(),
+    );
+  }
 }
 
-class _AdminPageState extends State<AdminPage> {
-  final List<ActivityLog> _activityLogs = [
-    ActivityLog(id: '1', message: 'User logged in.'),
-    ActivityLog(id: '2', message: 'User created a new note.'),
-    ActivityLog(id: '3', message: 'User deleted a note.'),
-  ];
+class AdminHomePage extends StatefulWidget {
+  @override
+  _AdminHomePageState createState() =>
+      _AdminHomePageState();
+}
 
-  // Method to add a new activity log
-  void _addActivityLog(String message) {
-    setState(() {
-      _activityLogs.add(ActivityLog(id: DateTime.now().toString(), message: message));
-    });
-  }
+class _AdminHomePageState extends State<AdminHomePage> {
+  List<Activity> activities = [];
 
-  // Method to edit an existing activity log
-  void _editActivityLog(String id, String newMessage) {
-    setState(() {
-      final index = _activityLogs.indexWhere((log) => log.id == id);
-      if (index != -1) {
-        _activityLogs[index] = ActivityLog(id: id, message: newMessage);
-      }
-    });
-  }
+  TextEditingController _activityController = TextEditingController();
+  TextEditingController _userController = TextEditingController();
 
-  // Method to delete an activity log
-  void _deleteActivityLog(String id) {
-    setState(() {
-      _activityLogs.removeWhere((log) => log.id == id);
-    });
-  }
+  DateTime? _selectedDateTime;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Admin Page'),
+        title: Text('Admin Page'),
       ),
       body: ListView.builder(
-        itemCount: _activityLogs.length,
-        itemBuilder: (context, index) {
-          final log = _activityLogs[index];
-          return ListTile(
-            title: Text(log.message),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    _showEditDialog(log); // Show edit dialog
-                  },
+        itemCount: activities.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
+            children: [
+              ListTile(
+                title: Text(activities[index].name),
+                subtitle: Text(
+                    'User: ${activities[index].user}, Date: ${activities[index].date}, Time: ${activities[index].time}'),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        _showEditActivityDialog(context, index);
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {
+                        _deleteActivity(index);
+                      },
+                    ),
+                  ],
                 ),
-                IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    _deleteActivityLog(log.id); // Delete log
-                  },
+              ),
+              SizedBox(height: 8),
+              if (activities[index].logs.isNotEmpty) ...[
+                Text(
+                  'Logs:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
+                SizedBox(height: 4),
+                Column(
+                  children: activities[index]
+                      .logs
+                      .map((log) => Text(
+                            log,
+                            textAlign: TextAlign.center,
+                          ))
+                      .toList(),
+                ),
+                SizedBox(height: 8),
               ],
-            ),
+              Divider(),
+            ],
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _showAddDialog(); // Show add dialog
+          _showAddActivityDialog(context);
         },
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomAppBar(
+     bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
               onPressed: () {
-                // Handle logs button press (stay on this page)
+                // Handle my notes button press
               },
-              icon: const Icon(Icons.list),
+              icon: const Icon(Icons.history),
             ),
             IconButton(
-              onPressed: () {
-                // Handle navigation to another page (for example, "Home")
-                Navigator.pop(context); // Close this page
-              },
-              icon: const Icon(Icons.home),
-            ),
+                onPressed: () {
+                  
+                  Navigator.push(context,MaterialPageRoute(builder: (context) =>const NotesPage()),);
+                },
+                icon: const Icon(Icons.notes),
+              ),
+             
+            IconButton(
+  onPressed: () async {
+    // Navigate to 'other.dart'
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>const ViewOtherNotesPage()),
+    );
+  },
+  icon: const Icon(Icons.people_alt),
+),
           ],
         ),
-      ),
+      ),  
     );
   }
 
-  // Method to show a dialog for adding a new log
-  void _showAddDialog() {
-    TextEditingController textFieldController = TextEditingController();
+  void _showAddActivityDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
+        return AddActivityDialog(
+          userController: _userController,
+          activityController: _activityController,
+          selectedDateTime: _selectedDateTime,
+          onAddActivity: (user, activity, dateTime) {
+            _addActivity(user, activity, dateTime);
+          },
+          onCloseDialog: () {
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
+  }
+
+  void _addActivity(String user, String activityName, DateTime dateTime) {
+    setState(() {
+      activities.add(Activity(
+        user: user,
+        name: activityName,
+        date: '${dateTime.year}-${dateTime.month}-${dateTime.day}',
+        time: '${dateTime.hour}:${dateTime.minute}',
+        logs: ['Added at ${DateTime.now()}'], // Log entry for adding the activity
+      ));
+    });
+  }
+
+  void _showEditActivityDialog(BuildContext context, int index) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Add Log'),
-          content: TextField(
-            controller: textFieldController,
-            decoration: const InputDecoration(hintText: "Enter log message"),
+          title: Text('Edit Activity'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: TextEditingController(text: activities[index].user),
+                decoration: InputDecoration(labelText: 'User'),
+              ),
+              TextField(
+                controller: TextEditingController(text: activities[index].name),
+                decoration: InputDecoration(labelText: 'Activity'),
+              ),
+            ],
           ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
+          actions: [
+            ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.of(context).pop();
+                _editActivity(index, _userController.text, _activityController.text);
               },
+              child: Text('Save'),
             ),
-            TextButton(
-              child: const Text('Add'),
+            ElevatedButton(
               onPressed: () {
-                String message = textFieldController.text;
-                if (message.isNotEmpty) {
-                  _addActivityLog(message); // Add log
-                }
-                Navigator.pop(context);
+                Navigator.of(context).pop();
               },
+              child: Text('Cancel'),
             ),
           ],
         );
@@ -142,44 +201,30 @@ class _AdminPageState extends State<AdminPage> {
     );
   }
 
-  // Method to show a dialog for editing an existing log
-  void _showEditDialog(ActivityLog log) {
-    TextEditingController textFieldController = TextEditingController(text: log.message);
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Edit Log'),
-          content: TextField(
-            controller: textFieldController,
-            decoration: const InputDecoration(hintText: "Enter new log message"),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            TextButton(
-              child: const Text('Save'),
-              onPressed: () {
-                String message = textFieldController.text;
-                if (message.isNotEmpty) {
-                  _editActivityLog(log.id, message); // Edit log
-                }
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
+  void _editActivity(int index, String newUser, String newName) {
+    setState(() {
+      var editedActivity = activities[index];
+      editedActivity.user = newUser;
+      editedActivity.name = newName;
+      editedActivity.logs.add('Edited at ${DateTime.now()}'); // Log entry for editing the activity
+    });
+  }
+
+  void _deleteActivity(int index) {
+    setState(() {
+      var deletedActivity = activities[index];
+      deletedActivity.logs.add('Deleted at ${DateTime.now()}'); // Log entry for deleting the activity
+      activities.removeAt(index);
+    });
   }
 }
 
-void main() {
-  runApp(const MaterialApp(
-    home: AdminPage(),
-  ));
+class Activity {
+  String user;
+  String name;
+  String date;
+  String time;
+  List<String> logs;
+
+  Activity({required this.user, required this.name, required this.date, required this.time, this.logs = const []});
 }
