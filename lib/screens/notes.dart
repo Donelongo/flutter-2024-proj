@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './others.dart';
 import './addnotes.dart';
+import '../widgets/avatar.dart';
 
 class NotesPage extends StatelessWidget {
   const NotesPage({super.key});
@@ -11,7 +12,6 @@ Widget build(BuildContext context) {
       appBar: AppBar(
         title: const Text('My Notes'),
         actions: <Widget>[
-
         GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, '/login');
@@ -19,15 +19,10 @@ Widget build(BuildContext context) {
           child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),
         child: Center(
-          child: Text(
-            "Logout",
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
+          child: CircleAvatarWidget(key: Key('avatar')
+          ),
           ),
         )
-      ),
-    ),
   ),
 
   ],
