@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
+        brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           titleTextStyle: TextStyle(color: Colors.white),
@@ -31,10 +32,12 @@ class MyApp extends StatelessWidget {
           bodyText1: TextStyle(color: Colors.white),
           // ignore: deprecated_member_use
           bodyText2: TextStyle(color: Colors.white),
+
         ),
 
         inputDecorationTheme: const InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: Colors.grey),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             backgroundColor: Colors.black,
@@ -49,7 +52,7 @@ class MyApp extends StatelessWidget {
         '/admin': (context) => const AdminPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
-        '/notes': (context) => const NotesPage(),
+        '/notes': (context) => const Notepage(),
       },
     );
   }
