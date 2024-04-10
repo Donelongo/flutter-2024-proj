@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'add_activity_dialog.dart';
 import './others.dart';
-import './notes.dart';
+import '../notes.dart';
 
 void main() {
-  runApp(AdminPage());
+  runApp(const AdminPage());
 }
 
 class AdminPage extends StatelessWidget {
+  const AdminPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,13 +18,16 @@ class AdminPage extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: AdminHomePage(),
+      home: const AdminHomePage(),
     );
   }
 }
 
 class AdminHomePage extends StatefulWidget {
+  const AdminHomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AdminHomePageState createState() =>
       _AdminHomePageState();
 }
@@ -30,8 +35,8 @@ class AdminHomePage extends StatefulWidget {
 class _AdminHomePageState extends State<AdminHomePage> {
   List<Activity> activities = [];
 
-  TextEditingController _activityController = TextEditingController();
-  TextEditingController _userController = TextEditingController();
+  TextEditingController activityController = TextEditingController();
+  TextEditingController userController = TextEditingController();
 
   DateTime? _selectedDateTime;
 
@@ -39,7 +44,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Page'),
+        title: const Text('Admin Page'),
       ),
       body: ListView.builder(
         itemCount: activities.length,
@@ -54,13 +59,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.edit),
+                      icon: const Icon(Icons.edit),
                       onPressed: () {
                         _showEditActivityDialog(context, index);
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.delete),
+                      icon: const Icon(Icons.delete),
                       onPressed: () {
                         _deleteActivity(index);
                       },
@@ -68,13 +73,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   ],
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               if (activities[index].logs.isNotEmpty) ...[
-                Text(
+                const Text(
                   'Logs:',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Column(
                   children: activities[index]
                       .logs
@@ -84,9 +89,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           ))
                       .toList(),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
               ],
-              Divider(),
+              const Divider(),
             ],
           );
         },
@@ -95,9 +100,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
         onPressed: () {
           _showAddActivityDialog(context);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
-     bottomNavigationBar: BottomAppBar(
+    bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -109,12 +114,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
             ),
             IconButton(
                 onPressed: () {
-                  
-                  Navigator.push(context,MaterialPageRoute(builder: (context) =>const NotesPage()),);
+
+                  Navigator.push(context,MaterialPageRoute(builder: (context) =>const Notepage()),);
                 },
                 icon: const Icon(Icons.notes),
               ),
-             
+
             IconButton(
   onPressed: () async {
     // Navigate to 'other.dart'
@@ -127,7 +132,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 ),
           ],
         ),
-      ),  
+      ),
     );
   }
 
@@ -136,8 +141,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AddActivityDialog(
-          userController: _userController,
-          activityController: _activityController,
+          userController: userController,
+          activityController: activityController,
           selectedDateTime: _selectedDateTime,
           onAddActivity: (user, activity, dateTime) {
             _addActivity(user, activity, dateTime);
@@ -167,17 +172,17 @@ class _AdminHomePageState extends State<AdminHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Edit Activity'),
+          title: const Text('Edit Activity'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: TextEditingController(text: activities[index].user),
-                decoration: InputDecoration(labelText: 'User'),
+                decoration: const InputDecoration(labelText: 'User'),
               ),
               TextField(
                 controller: TextEditingController(text: activities[index].name),
-                decoration: InputDecoration(labelText: 'Activity'),
+                decoration: const InputDecoration(labelText: 'Activity'),
               ),
             ],
           ),
@@ -185,15 +190,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _editActivity(index, _userController.text, _activityController.text);
+                _editActivity(index, userController.text, activityController.text);
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
           ],
         );

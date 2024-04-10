@@ -7,7 +7,7 @@ class AddActivityDialog extends StatefulWidget {
   final Function(String, String, DateTime) onAddActivity;
   final VoidCallback onCloseDialog;
 
-  AddActivityDialog({
+  const AddActivityDialog({super.key,
     required this.userController,
     required this.activityController,
     required this.selectedDateTime,
@@ -16,10 +16,10 @@ class AddActivityDialog extends StatefulWidget {
   });
 
   @override
-  _AddActivityDialogState createState() => _AddActivityDialogState();
+  AddActivityDialogState createState() => AddActivityDialogState();
 }
 
-class _AddActivityDialogState extends State<AddActivityDialog> {
+class AddActivityDialogState extends State<AddActivityDialog> {
   DateTime? _selectedDateTime;
 
   @override
@@ -32,20 +32,20 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New Activity'),
+        title: const Text('Add New Activity'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: widget.userController,
-              decoration: InputDecoration(labelText: 'User'),
+              decoration: const InputDecoration(labelText: 'User'),
             ),
             TextField(
               controller: widget.activityController,
-              decoration: InputDecoration(labelText: 'Activity'),
+              decoration: const InputDecoration(labelText: 'Activity'),
             ),
             ElevatedButton(
               onPressed: () => _selectDateTime(context),
@@ -53,7 +53,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                   ? 'Select Date and Time'
                   : 'Date and Time: ${_selectedDateTime!.toString().substring(0, 16)}'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -68,17 +68,17 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                       widget.onCloseDialog();
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Please fill all fields.'),
                         ),
                       );
                     }
                   },
-                  child: Text('Add'),
+                  child: const Text('Add'),
                 ),
                 ElevatedButton(
                   onPressed: widget.onCloseDialog,
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 ),
               ],
             ),
@@ -97,6 +97,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
     );
     if (pickedDateTime != null) {
       final TimeOfDay? pickedTime = await showTimePicker(
+        // ignore: use_build_context_synchronously
         context: context,
         initialTime: TimeOfDay.now(),
       );

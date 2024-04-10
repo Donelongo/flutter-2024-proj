@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './admin/admin.dart';
-import 'package:digital_notebook/screens/admin/admin.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -36,7 +35,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AdminPage()),
+                      MaterialPageRoute(builder: (context) => const AdminPage()),
                     );
                   },
                   child: const Text('Admin'),

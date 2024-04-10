@@ -2,31 +2,31 @@ import 'package:flutter/material.dart';
 import './notes.dart';
 
 // Model class representing a note
-class Note {
+class _Note {
   final String title;
   final String content;
 
-  Note({required this.title, required this.content});
+  _Note({required this.title, required this.content});
 }
 
-class ViewNotesPage extends StatelessWidget {
+class _ViewNotesPage extends StatelessWidget {
   // Sample list of notes (replace with your data)
-  final List<Note> notes = [
-    Note(
+  final List<_Note> notes = [
+    _Note(
       title: 'Note 1',
       content: 'This is the content of note 1.',
     ),
-    Note(
+    _Note(
       title: 'Note 2',
       content: 'This is the content of note 2.',
     ),
-    Note(
+    _Note(
       title: 'Note 3',
       content: 'This is the content of note 3.',
     ),
   ];
 
-  ViewNotesPage({super.key});
+  _ViewNotesPage();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class ViewNotesPage extends StatelessWidget {
             );
           },
         ),
-          
+
       ),
     );
   }
@@ -94,13 +94,13 @@ class ViewOtherNotesPage extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   //navigate to notes page
-                  Navigator.push(context,MaterialPageRoute(builder: (context) =>const NotesPage()),);
+                  Navigator.push(context,MaterialPageRoute(builder: (context) =>const Notepage()),);
                 },
                 icon: const Icon(Icons.notes),
               ),
-             
+
             IconButton(
-                 onPressed: () async {
+                onPressed: () async {
                // Navigate to 'other.dart'
                     await Navigator.push(context, MaterialPageRoute(builder: (context) =>const ViewOtherNotesPage()),);
                 },
@@ -243,7 +243,7 @@ class OthersNotesCard extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: ViewNotesPage(),
+    home: _ViewNotesPage(),
   ));
 }
 }
