@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import '../models/note_model.dart';
+
 
 class AddNote extends StatefulWidget {
-  const AddNote({super.key});
+  const AddNote({super.key, required this.onNewNoteCreated});
+
+  final Function(Note) onNewNoteCreated;
 
   @override
   State<AddNote> createState() => _AddNoteState();
@@ -13,50 +17,53 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Add Note',
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Add Note',
+          style: TextStyle(
+            fontSize: 23,
+            fontWeight: FontWeight.bold
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              TextFormField(
-                controller: titleController,
-                style: const TextStyle(fontSize: 28),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Title",
-                ),
-                maxLines: null,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          children: [
+            TextFormField(
+              controller: titleController,
+              style: const TextStyle(fontSize: 28),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: "Title",
               ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: bodyController,
-                style: const TextStyle(fontSize: 18),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Enter your note here...",
-                ),
-                maxLines: null,
+              maxLines: null,
+            ),
+            const SizedBox(height: 10),
+            TextFormField(
+              controller: bodyController,
+              style: const TextStyle(fontSize: 18),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: "Enter your note here...",
               ),
-              const Spacer(),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Icon(Icons.save),
-                ),
-              ),
-            ],
-          ),
+              maxLines: null,
+            ),
+          ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final title = titleController.text;
+          final body = bodyController.text;
+          if (title.isNotEmpty && body.isNotEmpty) {
+            final newNote = Note(title: title, body: body);
+            widget.onNewNoteCreated(newNote);
+            Navigator.pop(context);
+          }
+        },
+        child: const Icon(Icons.save),
       ),
     );
   }

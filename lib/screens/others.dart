@@ -1,73 +1,64 @@
 import 'package:flutter/material.dart';
-
-// Model class representing a note
-class Note {
+class _Note {
   final String title;
   final String content;
 
-  Note({required this.title, required this.content});
+  _Note({required this.title, required this.content});
 }
 
-class ViewNotesPage extends StatelessWidget {
+// ignore: unused_element
+class _ViewNotesPage extends StatelessWidget {
   // Sample list of notes (replace with your data)
-  final List<Note> notes = [
-    Note(
+  final List<_Note> notes = [
+    _Note(
       title: 'Note 1',
       content: 'This is the content of note 1.',
     ),
-    Note(
+    _Note(
       title: 'Note 2',
       content: 'This is the content of note 2.',
     ),
-    Note(
+    _Note(
       title: 'Note 3',
       content: 'This is the content of note 3.',
     ),
   ];
 
-  ViewNotesPage({super.key});
+  _ViewNotesPage();
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('View Notes'),
+    return Scaffold(
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          dialogBackgroundColor: Colors.grey[900],
         ),
-        body: ListView.builder(
-          itemCount: notes.length,
-          itemBuilder: (context, index) {
-            final note = notes[index];
-            return ListTile(
-              title: Text(note.title),
-              subtitle: Text(note.content),
-            );
-          },
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Navigate to NotesPage
-                  Navigator.pop(context);
+        child: ListView.builder(
+            itemCount: notes.length,
+            itemBuilder: (context, index) {
+              final note = notes[index];
+              return OthersNotesCard(
+                title: note.title,
+                content: note.content,
+                onTap: () {
+                  _showNoteDetails(context, note.title);
                 },
-                icon: const Icon(Icons.notes),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Navigate to ViewOtherNotesPage
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ViewOtherNotesPage()),
-                  );
-                },
-                icon: const Icon(Icons.people_alt),
-              ),
-            ],
+              );
+            },
           ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: () {
+                // Navigate to NotesPage
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.notes),
+            ),
+          ],
         ),
       ),
     );
@@ -79,52 +70,26 @@ class ViewOtherNotesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Other's Notes"),
-        ),
-        body: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return OthersNotesCard(
-              title: 'Note ${index + 1}',
-              content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-              onTap: () {
-                _showNoteDetails(context, 'Note ${index + 1}');
-              },
-              // onEdit: () {
-              //   _editNote(context, 'Note ${index + 1}');
-              // },
-              // onDelete: () {
-              //   _deleteNote(context, 'Note ${index + 1}');
-              // },
-            );
-          },
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Navigate to NotesPage
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.notes),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Do nothing, already on this page
-                },
-                icon: const Icon(Icons.people_alt),
-              ),
-            ],
+    return Scaffold(
+        body: Theme(
+          data: Theme.of(context).copyWith(
+            dialogBackgroundColor: Colors.grey[900],
           ),
+          child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return OthersNotesCard(
+
+                  title: 'Note ${index + 1}',
+                  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  onTap: () {
+                    _showNoteDetails(context, 'Note ${index + 1}');
+                  },
+                );
+              },
+            ),
         ),
-      ),
-    );
+        );
   }
 }
 
@@ -137,6 +102,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Colors.grey[900],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -151,6 +117,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8.0),
+        color: Colors.grey[900],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -257,7 +224,7 @@ class OthersNotesCard extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
-    home: ViewNotesPage(),
+    home: _ViewNotesPage(),
   ));
 }
 }

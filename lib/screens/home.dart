@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import './admin/admin.dart';
+import 'package:digital_notebook/screens/admin/admin.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(brightness: Brightness.dark),
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Center(
-            child: Text('Home'),
+            child: Text('Digital Notebook',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24
+              ),
+            )
           ),
         ),
         body: Container(
@@ -58,19 +63,18 @@ class HomePage extends StatelessWidget {
                       child: const Text('Sign Up'),
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/notes');
-                      },
-                      child: const Text('View Notes'),
-                    ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     Navigator.pushNamed(context, '/notes');
+                    //   },
+                    //   child: const Text('View Notes'),
+                    // ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ),
     );
   }
 }
