@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/screens/home.dart';
 import 'package:digital_notebook/screens/admin/admin.dart';
@@ -10,29 +12,32 @@ import 'package:digital_notebook/screens/notes.dart';
 import 'package:digital_notebook/screens/others.dart';
 
 enum ThemeModeOption {
-  White,
+  white,
+  // ignore: constant_identifier_names
   Sepia,
-  Dark,
+  dark,
 }
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  ThemeModeOption _currentThemeMode = ThemeModeOption.White;
+class MyAppState extends State<MyApp> {
+  ThemeModeOption currentThemeMode = ThemeModeOption.white;
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = _buildThemeData();
+    ThemeData themeData = buildThemeData();
      // Build theme data dynamically
     return MaterialApp(
-      themeMode: _currentThemeMode == ThemeModeOption.Dark
+      themeMode: currentThemeMode == ThemeModeOption.dark
           ? ThemeMode.dark
           : ThemeMode.light,
       theme: themeData,
@@ -52,51 +57,51 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  ThemeData _buildThemeData() {
-    switch (_currentThemeMode) {
-      case ThemeModeOption.White:
+  ThemeData buildThemeData() {
+    switch (currentThemeMode) {
+      case ThemeModeOption.white:
         return ThemeData.light().copyWith(
           textTheme: ThemeData.light().textTheme.copyWith(
-        bodyText1: TextStyle(fontFamily: 'Mate'),
-        bodyText2: TextStyle(fontFamily: 'Mate'),
-          ),   
+        bodyText1: const TextStyle(fontFamily: 'Mate'),
+        bodyText2: const TextStyle(fontFamily: 'Mate'),
+          ),
         );
       case ThemeModeOption.Sepia:
         return ThemeData.light().copyWith(
-          scaffoldBackgroundColor: Color.fromARGB(255, 189, 148, 128), // Sepia color
+          scaffoldBackgroundColor: const Color.fromARGB(255, 189, 148, 128), // Sepia color
           appBarTheme: const AppBarTheme(
             backgroundColor: Color.fromARGB(255, 189, 148, 128), // Sepia color
             titleTextStyle: TextStyle(color: Colors.grey, fontFamily: 'Mate'),
             iconTheme: IconThemeData(color: Colors.grey),
           ),
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
             bodyText1: TextStyle(color: Colors.grey, fontFamily: 'Mate'),
             bodyText2: TextStyle(color: Colors.grey, fontFamily: 'Mate'),
           ),
-          inputDecorationTheme: InputDecorationTheme(
+          inputDecorationTheme: const InputDecorationTheme(
             labelStyle: TextStyle(color: Colors.white, fontFamily: 'Mate'),
             hintStyle: TextStyle(color: Colors.grey, fontFamily: 'Mate'),
           ),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             backgroundColor:Color.fromARGB(255, 189, 148, 128), // Sepia color
             selectedItemColor: Colors.grey,
             unselectedItemColor: Colors.grey,
           ),
-          bottomAppBarTheme: BottomAppBarTheme(color:Color.fromARGB(255, 189, 148, 128)), // Sepia color
+          bottomAppBarTheme: const BottomAppBarTheme(color:Color.fromARGB(255, 189, 148, 128)), // Sepia color
         );
-      case ThemeModeOption.Dark:
+      case ThemeModeOption.dark:
         return ThemeData.dark().copyWith(
-           textTheme: ThemeData.light().textTheme.copyWith(
-        bodyText1: TextStyle(fontFamily: 'Mate'),
-        bodyText2: TextStyle(fontFamily: 'Mate'),
+          textTheme: ThemeData.light().textTheme.copyWith(
+        bodyText1: const TextStyle(fontFamily: 'Mate'),
+        bodyText2: const TextStyle(fontFamily: 'Mate'),
           ),
         );
     }
   }
 
-  void _changeThemeMode(ThemeModeOption newThemeMode) {
+  void changeThemeMode(ThemeModeOption newThemeMode) {
     setState(() {
-      _currentThemeMode = newThemeMode;
+      currentThemeMode = newThemeMode;
     });
   }
 }

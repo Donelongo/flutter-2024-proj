@@ -1,12 +1,12 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import '../addnotes.dart';
 import 'package:digital_notebook/models/note_model.dart';
 import 'package:digital_notebook/widgets/note_card.dart';
-import '../../widgets/avatar.dart';
-import './adminOthers.dart';
+
 
 class AdminNotepage extends StatefulWidget {
-  const AdminNotepage({Key? key});
+  const AdminNotepage({super.key});
 
   @override
   State<AdminNotepage> createState() => AdminNotepageState();

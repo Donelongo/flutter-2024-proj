@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import '../../widgets/password.dart';
 import '../../widgets/email.dart';
@@ -30,7 +31,8 @@ class AdminLoginPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Center(child:Text(
+                  children: [const Center(
+                    child: Text(
                       'Welcome Back, Admin',
                       style: TextStyle(
                         color: Colors.black,
@@ -41,7 +43,7 @@ class AdminLoginPage extends StatelessWidget {
                     Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Not an Admin,',
                       style: TextStyle(
                         color: Colors.black,
@@ -52,7 +54,7 @@ class AdminLoginPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/signup');
                       },
-                      child: Text(
+                      child: const Text(
                         'Click here',
                         style: TextStyle(
                           color: Colors.blueGrey,

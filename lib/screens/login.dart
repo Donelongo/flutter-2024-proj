@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Center(child:Text(
+                  children: [const Center(child:Text(
                       'Welcome back, User',
                       style: TextStyle(
                         color: Colors.black,
@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Don't have an account?",
                       style: TextStyle(
                         color: Colors.black,
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushNamed(context, '/signup');
                       },
-                      child: Text(
+                      child: const Text(
                         'Register here',
                         style: TextStyle(
                           color: Colors.blueGrey,

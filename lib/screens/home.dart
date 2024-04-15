@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:digital_notebook/screens/admin/admin.dart';
-import 'package:digital_notebook/screens/signup.dart';
+
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class HomePage extends StatelessWidget {
             right: 0,
             child: Container(
               height: 400,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/quill.png'),
                   fit: BoxFit.scaleDown,
@@ -71,18 +70,19 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/signup');
               },
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all<Size>(Size(150, 50)), // Adjusted button size
+                minimumSize: MaterialStateProperty.all<Size> (const Size(150, 50)), // Adjusted button size
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.pressed))
+                    if (states.contains(MaterialState.pressed)) {
                       return Colors.blueGrey.withOpacity(0.9);
+                    }
                     return Colors.white; // Use white color as the default button color
                   },
                 ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(180),
-                    side: BorderSide(color: Colors.blueGrey, width: 2), // Red border, adjusted width
+                    side: const BorderSide(color: Colors.blueGrey, width: 2), // Red border, adjusted width
                   ),
                 ),
                 elevation: MaterialStateProperty.all<double>(5), // Increased elevation
@@ -108,7 +108,7 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, '/adminLogin');
                   },
-                  child: Text(
+                  child: const Text(
                     'Click here',
                     style: TextStyle(
                       color: Colors.blueGrey,
@@ -116,7 +116,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   'for Admin',
                   style: TextStyle(
                     color: Colors.black,

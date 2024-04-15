@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import './add_activity_dialog.dart';
 import './adminOthers.dart';
 import './adminNotes.dart';
-import 'package:digital_notebook/models/note_model.dart';
-import 'package:digital_notebook/widgets/note_card.dart';
-import '../../widgets/avatar.dart';
+
 
 class AdminPage extends StatefulWidget {
+  const AdminPage({super.key});
+
   @override
-  _AdminPageState createState() => _AdminPageState();
+  AdminPageState createState() => AdminPageState();
 }
 
-class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixin {
+class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixin {
   List<Activity> activities = [];
-  TextEditingController _activityController = TextEditingController();
-  TextEditingController _userController = TextEditingController();
+  TextEditingController activityController = TextEditingController();
+  TextEditingController userController = TextEditingController();
   DateTime? _selectedDateTime;
   late TabController _tabController; // Define TabController
 
@@ -33,7 +33,7 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin', style: TextStyle(fontSize: 25) ,),
+        title: const Text('Admin', style: TextStyle(fontSize: 25) ,),
       ),
       body: TabBarView(
         controller: _tabController, // Assign TabController to TabBarView
@@ -52,13 +52,13 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: Icon(Icons.edit),
+                          icon: const Icon(Icons.edit),
                           onPressed: () {
                             _showEditActivityDialog(context, index);
                           },
                         ),
                         IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () {
                             _deleteActivity(index);
                           },
@@ -66,13 +66,13 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
                       ],
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   if (activities[index].logs.isNotEmpty) ...[
-                    Text(
+                    const Text(
                       'Logs:',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Column(
                       children: activities[index]
                           .logs
@@ -82,9 +82,9 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
                               ))
                           .toList(),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                   ],
-                  Divider(),
+                  const Divider(),
                 ],
               );
             },
@@ -100,12 +100,12 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
               onPressed: () {
                 _showAddActivityDialog(context);
               }, backgroundColor: Colors.blueGrey,
-              child: Icon(Icons.add, color: Colors.white),
+              child: const Icon(Icons.add, color: Colors.white),
             )
           : null,
       bottomNavigationBar: TabBar(
         controller: _tabController, // Assign TabController to TabBar
-        tabs: [
+        tabs: const [
           Tab(icon: Icon(Icons.history, color:Colors.blueGrey)), // Current page
           Tab(icon: Icon(Icons.notes, color:Colors.blueGrey)), // Notes page
           Tab(icon: Icon(Icons.people_alt, color:Colors.blueGrey)), // Other People page
@@ -119,8 +119,8 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
       context: context,
       builder: (BuildContext context) {
         return AddActivityDialog(
-          userController: _userController,
-          activityController: _activityController,
+          userController: userController,
+          activityController: activityController,
           selectedDateTime: _selectedDateTime,
           onAddActivity: (user, activity, dateTime) {
             _addActivity(user, activity, dateTime);
@@ -150,17 +150,17 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Edit Activity'),
+          title: const Text('Edit Activity'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: TextEditingController(text: activities[index].user),
-                decoration: InputDecoration(labelText: 'User'),
+                decoration: const InputDecoration(labelText: 'User'),
               ),
               TextField(
                 controller: TextEditingController(text: activities[index].name),
-                decoration: InputDecoration(labelText: 'Activity'),
+                decoration: const InputDecoration(labelText: 'Activity'),
               ),
             ],
           ),
@@ -168,15 +168,15 @@ class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMix
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _editActivity(index, _userController.text, _activityController.text);
+                _editActivity(index, userController.text, activityController.text);
               },
-              child: Text('Save'),
+              child: const Text('Save'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
           ],
         );
