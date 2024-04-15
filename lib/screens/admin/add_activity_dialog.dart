@@ -51,7 +51,7 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
               onPressed: () => _selectDateTime(context),
               child: Text(_selectedDateTime == null
                   ? 'Select Date and Time'
-                  : 'Date and Time: ${_selectedDateTime!.toString().substring(0, 16)}'),
+                  : 'Date and Time: ${_selectedDateTime!.toString().substring(0, 16)}', style:TextStyle(color: Colors.blueGrey)),
             ),
             SizedBox(height: 16),
             Row(
@@ -74,11 +74,11 @@ class _AddActivityDialogState extends State<AddActivityDialog> {
                       );
                     }
                   },
-                  child: Text('Add'),
+                  child: Text('Add', style:TextStyle(color: Colors.blueGrey)),
                 ),
                 ElevatedButton(
                   onPressed: widget.onCloseDialog,
-                  child: Text('Cancel'),
+                  child: Text('Cancel', style:TextStyle(color: Colors.blueGrey)),
                 ),
               ],
             ),

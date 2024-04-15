@@ -1,133 +1,116 @@
 import 'package:flutter/material.dart';
-import 'add_activity_dialog.dart';
-import './others.dart';
-import './notes.dart';
+import './add_activity_dialog.dart';
+import './adminOthers.dart';
+import './adminNotes.dart';
+import 'package:digital_notebook/models/note_model.dart';
+import 'package:digital_notebook/widgets/note_card.dart';
+import '../../widgets/avatar.dart';
 
-void main() {
-  runApp(AdminPage());
-}
-
-class AdminPage extends StatelessWidget {
+class AdminPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Activity Logs',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: AdminHomePage(),
-    );
-  }
+  _AdminPageState createState() => _AdminPageState();
 }
 
-class AdminHomePage extends StatefulWidget {
-  @override
-  _AdminHomePageState createState() =>
-      _AdminHomePageState();
-}
-
-class _AdminHomePageState extends State<AdminHomePage> {
+class _AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixin {
   List<Activity> activities = [];
-
   TextEditingController _activityController = TextEditingController();
   TextEditingController _userController = TextEditingController();
-
   DateTime? _selectedDateTime;
+  late TabController _tabController; // Define TabController
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this); // Initialize TabController
+    _tabController.addListener(_handleTabSelection); // Add listener for tab selection
+  }
+
+  void _handleTabSelection() {
+    setState(() {}); // Update the state when a tab is selected
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Page'),
+        title: Text('Admin', style: TextStyle(fontSize: 25) ,),
       ),
-      body: ListView.builder(
-        itemCount: activities.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              ListTile(
-                title: Text(activities[index].name),
-                subtitle: Text(
-                    'User: ${activities[index].user}, Date: ${activities[index].date}, Time: ${activities[index].time}'),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        _showEditActivityDialog(context, index);
-                      },
+      body: TabBarView(
+        controller: _tabController, // Assign TabController to TabBarView
+        children: [
+          // Current page content (AdminHomePage)
+          ListView.builder(
+            itemCount: activities.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Column(
+                children: [
+                  ListTile(
+                    title: Text(activities[index].name),
+                    subtitle: Text(
+                      'User: ${activities[index].user}, Date: ${activities[index].date}, Time: ${activities[index].time}'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            _showEditActivityDialog(context, index);
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            _deleteActivity(index);
+                          },
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {
-                        _deleteActivity(index);
-                      },
+                  ),
+                  SizedBox(height: 8),
+                  if (activities[index].logs.isNotEmpty) ...[
+                    Text(
+                      'Logs:',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
+                    SizedBox(height: 4),
+                    Column(
+                      children: activities[index]
+                          .logs
+                          .map((log) => Text(
+                                log,
+                                textAlign: TextAlign.center,
+                              ))
+                          .toList(),
+                    ),
+                    SizedBox(height: 8),
                   ],
-                ),
-              ),
-              SizedBox(height: 8),
-              if (activities[index].logs.isNotEmpty) ...[
-                Text(
-                  'Logs:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 4),
-                Column(
-                  children: activities[index]
-                      .logs
-                      .map((log) => Text(
-                            log,
-                            textAlign: TextAlign.center,
-                          ))
-                      .toList(),
-                ),
-                SizedBox(height: 8),
-              ],
-              Divider(),
-            ],
-          );
-        },
+                  Divider(),
+                ],
+              );
+            },
+          ),
+          // Notes page content
+          const AdminNotepage(),
+          // Other People page content
+          const AdminOthersPage(),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddActivityDialog(context);
-        },
-        child: Icon(Icons.add),
-      ),
-     bottomNavigationBar: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
+      floatingActionButton: _tabController.index == 0 // Show FAB only on the home page
+          ? FloatingActionButton(
               onPressed: () {
-                // Handle my notes button press
-              },
-              icon: const Icon(Icons.history),
-            ),
-            IconButton(
-                onPressed: () {
-                  
-                  Navigator.push(context,MaterialPageRoute(builder: (context) =>const NotesPage()),);
-                },
-                icon: const Icon(Icons.notes),
-              ),
-             
-            IconButton(
-  onPressed: () async {
-    // Navigate to 'other.dart'
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) =>const ViewOtherNotesPage()),
-    );
-  },
-  icon: const Icon(Icons.people_alt),
-),
-          ],
-        ),
-      ),  
+                _showAddActivityDialog(context);
+              }, backgroundColor: Colors.blueGrey,
+              child: Icon(Icons.add, color: Colors.white),
+            )
+          : null,
+      bottomNavigationBar: TabBar(
+        controller: _tabController, // Assign TabController to TabBar
+        tabs: [
+          Tab(icon: Icon(Icons.history, color:Colors.blueGrey)), // Current page
+          Tab(icon: Icon(Icons.notes, color:Colors.blueGrey)), // Notes page
+          Tab(icon: Icon(Icons.people_alt, color:Colors.blueGrey)), // Other People page
+        ],
+      ),
     );
   }
 

@@ -31,7 +31,7 @@ class _ViewNotesPage extends StatelessWidget {
     return Scaffold(
       body: Theme(
         data: Theme.of(context).copyWith(
-          dialogBackgroundColor: Colors.grey[900],
+          dialogBackgroundColor: Colors.grey[400],
         ),
         child: ListView.builder(
             itemCount: notes.length,
@@ -73,7 +73,7 @@ class ViewOtherNotesPage extends StatelessWidget {
     return Scaffold(
         body: Theme(
           data: Theme.of(context).copyWith(
-            dialogBackgroundColor: Colors.grey[900],
+            dialogBackgroundColor: Colors.grey[700],
           ),
           child: ListView.builder(
               itemCount: 10,
@@ -102,7 +102,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey[700],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -117,7 +117,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8.0),
-        color: Colors.grey[900],
+        color: Colors.white,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,

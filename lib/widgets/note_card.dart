@@ -17,7 +17,7 @@ class NotesCard extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoteView(note: note, index: index, onNoteDeleted: onNoteDeleted, onNoteEdited: onNoteEdited,)));
       },
       child: Card(
-              color: Colors.grey[900],
+              color: Colors.grey[400],
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(

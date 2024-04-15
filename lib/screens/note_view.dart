@@ -38,7 +38,7 @@ class NoteViewState extends State<NoteView> {
                 context: context,
                 builder: (context){
                   return Theme(
-                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.grey[900]),
+                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.white),
                     child: AlertDialog(
                       title: const Text("Edit Note",
                         style: TextStyle(
@@ -90,7 +90,7 @@ class NoteViewState extends State<NoteView> {
                 context: context,
                 builder: (context){
                   return Theme(
-                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.grey[900]),
+                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.white),
                     child: AlertDialog(
                       title: const Text("Delete Note ?",
                       style: TextStyle(

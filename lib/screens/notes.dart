@@ -39,7 +39,6 @@ void initState() {
             'Notes',
             style: TextStyle(
               fontSize: 28,
-              fontWeight: FontWeight.bold
             ),
           ),
         ),
@@ -93,7 +92,7 @@ tabs: const [
                     )),
           );
         },
-        backgroundColor: Colors.grey[700],
+        backgroundColor: Colors.blueGrey,
         child: const Icon(
           Icons.add,
           color: Colors.white,

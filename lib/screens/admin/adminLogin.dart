@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widgets/password.dart';
-import '../widgets/email.dart';
+import '../../widgets/password.dart';
+import '../../widgets/email.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class AdminLoginPage extends StatelessWidget {
+  const AdminLoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +31,18 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [Center(child:Text(
-                      'Welcome back, User',
+                      'Welcome Back, Admin',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
                       ),
                     ),
-              ),
-                Row(
+                  ),
+                    Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an account?",
+                      'Not an Admin,',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 13,
@@ -53,7 +53,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.pushNamed(context, '/signup');
                       },
                       child: Text(
-                        'Register here',
+                        'Click here',
                         style: TextStyle(
                           color: Colors.blueGrey,
                           fontSize: 13,
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
+                    ),
                     const EmailField(),
                     const SizedBox(height: 20),
                     const PasswordWidget(
@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/notes');
+                        Navigator.pushNamed(context, '/admin');
                       },
                       child: const Text('Login', style:TextStyle(color: Colors.blueGrey)),
                     ),

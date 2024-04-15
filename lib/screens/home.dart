@@ -1,95 +1,132 @@
 import 'package:flutter/material.dart';
-import './admin/admin.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:digital_notebook/screens/admin/admin.dart';
+import 'package:digital_notebook/screens/signup.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Center(
-            child: Text('Digital Notebook',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Text(
+            'Echo',
+            style: GoogleFonts.dancingScript(
+              textStyle: TextStyle(
+                color: Colors.red[500],
+                fontSize: 50,
+                fontWeight: FontWeight.w400,
               ),
-            )
-          ),
-        ),
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/e.jpeg'),
-              fit: BoxFit.cover,
             ),
           ),
-          child: Stack(
-            children: [
-              // Admin Button
-              Positioned(
-                top: 20,
-                right: 20,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AdminPage()),
-                    );
-                  },
-                  child: const Text('Admin'),
-                ),
-              ),
-              // Buttons
-              Positioned(
-                bottom: 50,
-                left: 0,
-                right: 0,
-                child: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/login');
-                      },
-                      child: const Text('Login'),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/signup');
-                      },
-                      child: const Text('Sign Up'),
-                    ),
-                    const SizedBox(height: 20),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     Navigator.pushNamed(context, '/notes');
-                    //   },
-                    //   child: const Text('View Notes'),
-                    // ),
-                  ],
-                ),
-              ),
-            ],
-          ),
         ),
-    );
-  }
-}
-
-class AdminLogsPage extends StatelessWidget {
-  const AdminLogsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Admin Logs'),
+        backgroundColor: Colors.white,
       ),
-      body: const Center(
-        child: Text('Admin Logs will be displayed here'),
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 400,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/quill.png'),
+                  fit: BoxFit.scaleDown,
+                ),
+              ),
+            ),
+          ),
+          // Slogan
+          Positioned(
+            top: 400,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'Put your notes \n                  here',
+                style: GoogleFonts.dancingScript(
+                  textStyle: TextStyle(
+                    color: Colors.red[500],
+                    fontSize: 30,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Register Here Button
+          Positioned(
+            top: 500,
+            left: 50,
+            right: 50,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/signup');
+              },
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all<Size>(Size(150, 50)), // Adjusted button size
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.pressed))
+                      return Colors.blueGrey.withOpacity(0.9);
+                    return Colors.white; // Use white color as the default button color
+                  },
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(180),
+                    side: BorderSide(color: Colors.blueGrey, width: 2), // Red border, adjusted width
+                  ),
+                ),
+                elevation: MaterialStateProperty.all<double>(5), // Increased elevation
+                shadowColor: MaterialStateProperty.all<Color>(Colors.grey.withOpacity(0.5)), // Shadow color
+              ),
+              child: const Text(
+                'Register Here',
+                style: TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w400, fontSize:18 // Black text color
+                ),
+              ),
+            ),
+          ),
+          // Click Here for Admin Button
+          Positioned(
+            bottom: 80,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/adminLogin');
+                  },
+                  child: Text(
+                    'Click here',
+                    style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                Text(
+                  'for Admin',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

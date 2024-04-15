@@ -55,7 +55,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  fonts:
+    - family: Mate
+      fonts:
+        - asset: ./assets/fonts/Mate-Italic.ttf
+          style: italic
+        - asset: ./assets/fonts/Mate-Regular.ttf
+          style: normal
 
 
   # The following line ensures that the Material Icons font is
@@ -68,6 +74,8 @@ flutter:
     - ./assets/images/i1.jpeg
     - ./assets/images/e.jpeg
     - ./assets/images/avatar.png
+    - ./assets/images/ink.jpg
+    - ./assets/images/quill.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
