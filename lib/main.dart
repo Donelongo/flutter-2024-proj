@@ -45,7 +45,7 @@ class MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomePage(),
-        '/admin': (context) => AdminPage(),
+        '/admin': (context) => const AdminPage(),
         'other': (context)=> const ViewOtherNotesPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),

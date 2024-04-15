@@ -106,9 +106,9 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
       bottomNavigationBar: TabBar(
         controller: _tabController, // Assign TabController to TabBar
         tabs: const [
-          Tab(icon: Icon(Icons.history, color:Colors.blueGrey)), // Current page
-          Tab(icon: Icon(Icons.notes, color:Colors.blueGrey)), // Notes page
-          Tab(icon: Icon(Icons.people_alt, color:Colors.blueGrey)), // Other People page
+          Tab(icon: Icon(Icons.history, color:Colors.blueGrey), text: 'History',), // Current page
+          Tab(icon: Icon(Icons.notes, color:Colors.blueGrey), text: 'Notes',), // Notes page
+          Tab(icon: Icon(Icons.people_alt, color:Colors.blueGrey), text: "Other's Notes",), // Other People page
         ],
       ),
     );

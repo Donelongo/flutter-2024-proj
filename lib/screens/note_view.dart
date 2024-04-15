@@ -38,7 +38,7 @@ class NoteViewState extends State<NoteView> {
                 context: context,
                 builder: (context){
                   return Theme(
-                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.white),
+                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.grey[900]),
                     child: AlertDialog(
                       title: const Text("Edit Note",
                         style: TextStyle(
@@ -51,12 +51,17 @@ class NoteViewState extends State<NoteView> {
                             controller: titleController,
                             decoration: const InputDecoration(hintText: 'Title'),
                             style: const TextStyle(
-                              fontSize: 25
+                              fontSize: 25,
+                              color: Colors.white
                             ),
                           ),
                           TextField(
                             controller: bodyController,
                             decoration: const InputDecoration(hintText: 'Body'),
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.white
+                            ),
                             maxLines: null,
                           ),
                         ],
@@ -90,7 +95,7 @@ class NoteViewState extends State<NoteView> {
                 context: context,
                 builder: (context){
                   return Theme(
-                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.white),
+                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.black),
                     child: AlertDialog(
                       title: const Text("Delete Note ?",
                       style: TextStyle(
@@ -100,18 +105,18 @@ class NoteViewState extends State<NoteView> {
                       actions:[
                         TextButton(
                           onPressed: (){
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Cancel"),
+                        ),
+                        TextButton(
+                          onPressed: (){
                             widget.onNoteDeleted(widget.index);
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
                           },
                           child: const Text("Delete"),
                         ),
-                        TextButton(
-                          onPressed: (){
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Cancel"),
-                        )
                       ]
                     ),
                   );
@@ -128,12 +133,12 @@ class NoteViewState extends State<NoteView> {
           children: [
             Text(
               widget.note.title,
-              style: const TextStyle(fontSize: 30),
+              style: const TextStyle(fontSize: 30, color: Colors.black, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10,),
             Text(
               widget.note.body,
-              style: const TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20, color: Colors.black),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),

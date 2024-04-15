@@ -33,7 +33,7 @@ class _AddNoteState extends State<AddNote> {
           children: [
             TextFormField(
               controller: titleController,
-              style: const TextStyle(fontSize: 28),
+              style: const TextStyle(fontSize: 26, color: Colors.black, fontWeight: FontWeight.bold),
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: "Title",
@@ -43,7 +43,7 @@ class _AddNoteState extends State<AddNote> {
             const SizedBox(height: 10),
             TextFormField(
               controller: bodyController,
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18, color: Colors.black),
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: "Enter your note here...",

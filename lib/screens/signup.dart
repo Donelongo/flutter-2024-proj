@@ -3,13 +3,13 @@ import '../widgets/password.dart';
 import '../widgets/email.dart';
 
 class SignupPage extends StatefulWidget {
-  const SignupPage({Key? key}) : super(key: key);
+  const SignupPage({super.key});
 
   @override
-  _SignupPageState createState() => _SignupPageState();
+  SignupPageState createState() => SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class SignupPageState extends State<SignupPage> {
   final GlobalKey<EmailFieldState> _emailFieldKey = GlobalKey<EmailFieldState>();
 
   @override
@@ -24,7 +24,7 @@ class _SignupPageState extends State<SignupPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Center(child:Text(
+              children: [const Center(child:Text(
                       'Welcome, new User',
                       style: TextStyle(
                         color: Colors.black,
@@ -35,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Already have an account?',
                       style: TextStyle(
                         color: Colors.black,
@@ -46,7 +46,7 @@ class _SignupPageState extends State<SignupPage> {
                       onPressed: () {
                         Navigator.pushNamed(context, '/login');
                       },
-                      child: Text(
+                      child: const Text(
                         'Sign in here',
                         style: TextStyle(
                           color: Colors.blueGrey,
@@ -56,10 +56,10 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 EmailField(key: _emailFieldKey),
-                SizedBox(height: 10),
-                TextField(
+                const SizedBox(height: 10),
+                const TextField(
                   decoration: InputDecoration(
                     labelText: 'User Name',
                     labelStyle: TextStyle(
@@ -71,9 +71,9 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   style: TextStyle(fontFamily: 'San Serif', fontSize: 16),
                 ),
-                SizedBox(height: 10),
-                PasswordWidget(),
-                SizedBox(height: 20),
+                const SizedBox(height: 10),
+                const PasswordWidget(),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     final isValidEmail = _emailFieldKey.currentState?.isSignUpEnabled() ?? false;
@@ -84,14 +84,14 @@ class _SignupPageState extends State<SignupPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Invalid Email'),
-                            content: Text('Please enter a valid email address.'),
+                            title: const Text('Invalid Email'),
+                            content: const Text('Please enter a valid email address.'),
                             actions: [
                               TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -101,7 +101,7 @@ class _SignupPageState extends State<SignupPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 18,
                       fontFamily: 'San Serif',
                     ),

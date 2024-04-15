@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PasswordWidget extends StatefulWidget {
-  const PasswordWidget({Key? key});
+  const PasswordWidget({super.key});
 
   @override
   PasswordWidgetState createState() => PasswordWidgetState();
@@ -23,7 +23,7 @@ class PasswordWidgetState extends State<PasswordWidget> {
           textAlignVertical: TextAlignVertical.center, // Align text vertically to center
           decoration: InputDecoration(
             labelText: 'Password',
-            contentPadding: EdgeInsets.symmetric(horizontal: 10), // Add padding
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10), // Add padding
             border: InputBorder.none,
             suffixIcon: TextButton(
               onPressed: () {

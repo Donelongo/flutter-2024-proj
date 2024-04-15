@@ -78,7 +78,7 @@ void initState() {
       },
 tabs: const [
   Tab(icon: Icon(Icons.notes), text: "Notes"),
-  Tab(icon: Icon(Icons.people_alt), text: "People"),
+  Tab(icon: Icon(Icons.people_alt), text: "Other's Notes"),
 ],
       ),
     floatingActionButton: _tabController.index == 0
