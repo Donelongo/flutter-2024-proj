@@ -135,6 +135,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
       const SizedBox(height: 16),
@@ -144,17 +145,12 @@ class OthersNoteDetailsDialog extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                //   const Text(
-                //   'Lorem ipsum',
-                //     style:  TextStyle(
-                //       fontSize: 16,
-                //     ),
-                //   ),
           const SizedBox(height: 16),
                   const Text(
                   'Cillum tempor aute do esse exercitation nulla tempor. Non laborum enim tempor amet quis minim fugiat. Nulla aliqua consequat duis qui aliquip Lorem.',
                     style:  TextStyle(
                       fontSize: 16,
+                      color: Colors.black,
                     ),
                   ),
           const SizedBox(height: 16),

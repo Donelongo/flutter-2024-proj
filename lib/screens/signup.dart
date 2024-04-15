@@ -69,7 +69,10 @@ class SignupPageState extends State<SignupPage> {
                       borderSide: BorderSide(color: Colors.blueGrey),
                     ),
                   ),
-                  style: TextStyle(fontFamily: 'San Serif', fontSize: 16),
+                  style: TextStyle(
+                    fontFamily: 'San Serif',
+                    fontSize: 16,
+                    color:Colors.black),
                 ),
                 const SizedBox(height: 10),
                 const PasswordWidget(),
@@ -84,8 +87,13 @@ class SignupPageState extends State<SignupPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: const Text('Invalid Email'),
+                            title: const Text('Invalid Email',
+                            style: TextStyle(
+                              color: Colors.white
+                              ),
+                            ),
                             content: const Text('Please enter a valid email address.'),
+                            backgroundColor: Colors.grey[900],
                             actions: [
                               TextButton(
                                 onPressed: () {

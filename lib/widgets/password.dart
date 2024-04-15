@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class PasswordWidget extends StatefulWidget {
   const PasswordWidget({super.key});
@@ -12,18 +13,18 @@ class PasswordWidgetState extends State<PasswordWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(height: 57, 
+    return Container(height: 57,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.blueGrey),
         borderRadius: BorderRadius.circular(3),
       ),
-      child: Center( // Wrap TextFormField with Center
+      child: Center(
         child: TextFormField(
           obscureText: obscureText,
-          textAlignVertical: TextAlignVertical.center, // Align text vertically to center
+          textAlignVertical: TextAlignVertical.center,
           decoration: InputDecoration(
             labelText: 'Password',
-            contentPadding: const EdgeInsets.symmetric(horizontal: 10), // Add padding
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
             border: InputBorder.none,
             suffixIcon: TextButton(
               onPressed: () {
@@ -36,6 +37,9 @@ class PasswordWidgetState extends State<PasswordWidget> {
               ),
             ),
           ),
+          style: const TextStyle(
+              color: Colors.black,
+            ),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter a password';

@@ -39,7 +39,7 @@ class EmailFieldState extends State<EmailField> {
   Widget build(BuildContext context) {
     return Container(
       height: 57,
-      padding: const EdgeInsets.all(1), // Add padding to the container
+      padding: const EdgeInsets.all(1),
       child: TextField(
         controller: emailController,
         decoration: const InputDecoration(
@@ -54,6 +54,7 @@ class EmailFieldState extends State<EmailField> {
         style: const TextStyle(
           fontFamily: 'San Serif',
           fontSize: 16,
+          color: Colors.black,
         ),
         onChanged: (_) => _validateEmail(),
       ),

@@ -41,12 +41,20 @@ class AddActivityDialogState extends State<AddActivityDialog> {
           children: [
             TextField(
               controller: widget.userController,
-              decoration: const InputDecoration(labelText: 'User'),
+              decoration: const InputDecoration(
+                labelText: 'User',
+            ),
+            style: const TextStyle(
+                  color: Colors.black,
+                ),
             ),
             TextField(
               controller: widget.activityController,
               decoration: const InputDecoration(labelText: 'Activity'),
-            ),
+            style: const TextStyle(
+                  color: Colors.black,
+                ),
+              ),
             ElevatedButton(
               onPressed: () => _selectDateTime(context),
               child: Text(_selectedDateTime == null

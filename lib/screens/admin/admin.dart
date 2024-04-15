@@ -156,11 +156,21 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
             children: [
               TextField(
                 controller: TextEditingController(text: activities[index].user),
-                decoration: const InputDecoration(labelText: 'User'),
+                decoration: const InputDecoration(
+                  labelText: 'User'
+                  ),
+                  style: const TextStyle(
+                    color: Colors.black,
+                ),
               ),
               TextField(
                 controller: TextEditingController(text: activities[index].name),
-                decoration: const InputDecoration(labelText: 'Activity'),
+                decoration: const InputDecoration(
+                  labelText: 'Activity',
+                  ),
+                  style: const TextStyle(
+                    color: Colors.black,
+                ),
               ),
             ],
           ),
