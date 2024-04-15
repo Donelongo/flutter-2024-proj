@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/password.dart';
 
@@ -28,8 +29,11 @@ class SignupPage extends StatelessWidget {
                 ),
               const SizedBox(height: 20),
                 const Text('Create an account to get started',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
                   textAlign: TextAlign.center),
-                const SizedBox(height: 100),
+                const SizedBox(height: 30),
                 const Row(
                   children: [
                     Icon(Icons.person_outline, color: Colors.grey),
@@ -68,10 +72,31 @@ class SignupPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.pushNamed(context, '/');
                   },
                   child: const Text('Sign Up'),
                 ),
+                const SizedBox(height: 20),
+                RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          const TextSpan(
+                            text: "Already have an account? "),
+                          TextSpan(
+                              text: 'Login',
+                              style: const TextStyle(
+                                color: Colors.blue,
+                                decoration: TextDecoration.underline,
+                                ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context, '/');
+                                }
+                            )
+                        ]
+                        ),
+                    ),
               ],
             ),
           ),

@@ -46,7 +46,7 @@ void initState() {
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, '/login');
+              Navigator.pushNamed(context, '/');
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),

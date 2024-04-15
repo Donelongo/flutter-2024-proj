@@ -16,7 +16,7 @@ class CircleAvatarWidget extends StatelessWidget {
       },
       onSelected: (String value) {
         if (value == 'logout') {
-          Navigator.pushNamed(context, '/login');
+          Navigator.pushNamed(context, '/');
         }
       },
       child: const CircleAvatar(
