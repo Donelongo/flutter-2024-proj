@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/screens/home.dart';
 import 'package:digital_notebook/screens/admin/admin.dart';
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
         ),
 
         inputDecorationTheme: const InputDecorationTheme(
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: TextStyle(color: Colors.grey),
           hintStyle: TextStyle(color: Colors.grey),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -48,9 +47,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
+        '/': (context) => const LoginPage(),
         '/admin': (context) =>  const AdminPage(),
-        '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
         '/notes': (context) => const Notepage(),
       },
