@@ -1,6 +1,6 @@
 import 'package:digital_notebook/models/note_model.dart';
 import 'package:flutter/material.dart';
-import 'package:digital_notebook/screens/note_view.dart';
+import 'package:digital_notebook/presentation/screens/note_view.dart';
 
 class NotesCard extends StatelessWidget {
   const NotesCard({super.key, required this.note, required this.index, required this.onNoteDeleted, required this.onNoteEdited});

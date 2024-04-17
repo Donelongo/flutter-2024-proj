@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/note_model.dart';
+import 'package:digital_notebook/models/note_model.dart';
 
 class NoteView extends StatefulWidget {
   const NoteView({super.key, required this.note, required this.index, required this.onNoteDeleted, required this.onNoteEdited});

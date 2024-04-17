@@ -1,15 +1,15 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:digital_notebook/screens/home.dart';
-import 'package:digital_notebook/screens/admin/admin.dart';
-import 'package:digital_notebook/screens/admin/adminLogin.dart';
-import 'package:digital_notebook/screens/admin/adminNotes.dart';
-import 'package:digital_notebook/screens/admin/adminOthers.dart';
-import 'package:digital_notebook/screens/login.dart';
-import 'package:digital_notebook/screens/signup.dart';
-import 'package:digital_notebook/screens/notes.dart';
-import 'package:digital_notebook/screens/others.dart';
+import 'package:digital_notebook/presentation/screens/home.dart';
+import 'package:digital_notebook/presentation/screens/admin/admin.dart';
+import 'package:digital_notebook/presentation/screens/admin/adminLogin.dart';
+import 'package:digital_notebook/presentation/screens/admin/adminNotes.dart';
+import 'package:digital_notebook/presentation/screens/admin/adminOthers.dart';
+import 'package:digital_notebook/presentation/screens/login.dart';
+import 'package:digital_notebook/presentation/screens/signup.dart';
+import 'package:digital_notebook/presentation/screens/notes.dart';
+import 'package:digital_notebook/presentation/screens/others.dart';
 
 enum ThemeModeOption {
   white,

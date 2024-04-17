@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import '../addnotes.dart';
 import 'package:digital_notebook/models/note_model.dart';
-import 'package:digital_notebook/widgets/note_card.dart';
+import 'package:digital_notebook/presentation/widgets/note_card.dart';
 
 
 class AdminNotepage extends StatefulWidget {
