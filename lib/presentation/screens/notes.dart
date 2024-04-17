@@ -5,8 +5,6 @@ import 'package:digital_notebook/presentation/widgets/note_card.dart';
 import '../widgets/avatar.dart';
 import './others.dart';
 
-
-
 class Notepage extends StatefulWidget {
   const Notepage({super.key});
 

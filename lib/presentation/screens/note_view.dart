@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:digital_notebook/models/note_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class NoteView extends StatefulWidget {
-  const NoteView({super.key, required this.note, required this.index, required this.onNoteDeleted, required this.onNoteEdited});
-
   final Note note;
   final int index;
-
+  final Function(Note) onNoteEdited;
   final Function(int) onNoteDeleted;
-  final Function(int, String, String) onNoteEdited;
+
+  const NoteView(
+    // ignore: non_constant_identifier_names
+    {super.key, required this.note, required this.index, required this.onNoteEdited, required this.onNoteDeleted, required Function(int p1, String p2, String p3) Function});
 
   @override
   NoteViewState createState() => NoteViewState();
@@ -29,118 +31,87 @@ class NoteViewState extends State<NoteView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Note View"),
+        title: TextField(
+        controller: titleController,
+        style: const TextStyle(fontSize: 30.0, color: Colors.black),
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Title',
+          hintStyle: TextStyle(color: Colors.white.withAlpha(120)),
+        ),
+      ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context){
-                  return Theme(
-                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.grey[900]),
-                    child: AlertDialog(
-                      title: const Text("Edit Note",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      content: Column(
-                        children: [
-                          TextField(
-                            controller: titleController,
-                            decoration: const InputDecoration(hintText: 'Title'),
-                            style: const TextStyle(
-                              fontSize: 25,
-                              color: Colors.white
-                            ),
-                          ),
-                          TextField(
-                            controller: bodyController,
-                            decoration: const InputDecoration(hintText: 'Body'),
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white
-                            ),
-                            maxLines: null,
-                          ),
-                        ],
-                      ),
-                      actions:[
-                        TextButton(
-                          onPressed: (){
-                            widget.onNoteEdited(widget.index, titleController.text, bodyController.text);
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Save"),
-                        ),
-                        TextButton(
-                          onPressed: (){
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Cancel"),
-                        )
-                      ]
-                    ),
-                  );
-                }
-              );
-            },
-          ),
           IconButton(
             icon: const Icon(Icons.delete),
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context){
-                  return Theme(
-                    data: Theme.of(context).copyWith(dialogBackgroundColor: Colors.black),
-                    child: AlertDialog(
-                      title: const Text("Delete Note ?",
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),),
-                      content: Text("Note '${widget.note.title}' will be deleted!"),
-                      actions:[
-                        TextButton(
-                          onPressed: (){
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Cancel"),
-                        ),
-                        TextButton(
-                          onPressed: (){
-                            widget.onNoteDeleted(widget.index);
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("Delete"),
-                        ),
-                      ]
-                    ),
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: Colors.grey[900],
+                    title: const Text("Delete Note ?",
+                    style: TextStyle(
+                      color:Colors.white,
+                    ),),
+                    content: Text("Note '${titleController.text}' will be deleted!"),
+                    actions:[
+                      TextButton(
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: (){
+                          widget.onNoteDeleted(widget.index);
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Delete"),
+                      ),
+                    ]
                   );
                 }
               );
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: () {
+              widget.note.title = titleController.text;
+              widget.note.body = bodyController.text;
+              widget.onNoteEdited(widget.note);
+              Navigator.of(context).pop();
+            },
+          ),
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.note.title,
-              style: const TextStyle(fontSize: 30, color: Colors.black, fontWeight: FontWeight.bold),
-            ),
+            // TextField(
+            //   controller: titleController,
+            //   style: const TextStyle(
+            //     fontSize: 30, color:
+            //     Colors.black, fontWeight:
+            //     FontWeight.bold,
+            //     ),
+            //     decoration: const InputDecoration(
+            //       hintText: "Title",
+            //       border: InputBorder.none,
+            //     ),
+            // ),
             const SizedBox(height: 10,),
-            Text(
-              widget.note.body,
+            TextField(
+              controller: bodyController,
               style: const TextStyle(fontSize: 20, color: Colors.black),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+              maxLines: null,
+              decoration: const InputDecoration(
+                hintText: "Note",
+                border: InputBorder.none,
+              ),
             ),
           ],
         ),

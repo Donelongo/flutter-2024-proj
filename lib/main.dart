@@ -1,5 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/home.dart';
 import 'package:digital_notebook/presentation/screens/admin/admin.dart';

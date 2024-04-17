@@ -14,8 +14,17 @@ class NotesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoteView(note: note, index: index, onNoteDeleted: onNoteDeleted, onNoteEdited: onNoteEdited,)));
-      },
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+        NoteView(
+          note: note,
+          index: index,
+          onNoteDeleted: onNoteDeleted,
+          onNoteEdited: (Note updatedNote) {},
+          Function: (int p1, String p2, String p3) {  },
+        ),
+        ),
+        );
+        },
       child: Card(
               color: Colors.grey[400],
               child: Padding(
@@ -42,6 +51,6 @@ class NotesCard extends StatelessWidget {
                 ),
               ),
             ),
-    );
+        );
+      }
   }
-}
