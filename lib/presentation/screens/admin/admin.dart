@@ -90,7 +90,11 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
             },
           ),
           // Notes page content
-          const AdminNotepage(),
+          AdminNotepage(onNewNoteCreated: (note) {
+            //do Nothing
+            },
+            currentIndex: 0,
+            ),
           // Other People page content
           const AdminOthersPage(),
         ],

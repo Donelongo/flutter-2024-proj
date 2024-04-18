@@ -1,6 +1,5 @@
 import 'package:digital_notebook/models/note_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class NoteView extends StatefulWidget {
   final Note note;
@@ -78,9 +77,7 @@ class NoteViewState extends State<NoteView> {
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () {
-              widget.note.title = titleController.text;
-              widget.note.body = bodyController.text;
-              widget.onNoteEdited(widget.note);
+              widget.note.title = titleController.text; widget.note.body = bodyController.text; widget.onNoteEdited(widget.note);
               Navigator.of(context).pop();
             },
           ),

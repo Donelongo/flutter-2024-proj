@@ -50,7 +50,12 @@ class MyAppState extends State<MyApp> {
         '/signup': (context) => const SignupPage(),
         '/notes': (context) => const Notepage(),
         '/adminLogin':(context) => const AdminLoginPage(),
-        '/adminNotes': (context)=> const AdminNotepage(),
+        '/adminNotes': (context) => AdminNotepage(
+            onNewNoteCreated: (note) {
+              // Do nothing
+            },
+            currentIndex: 0,
+          ),
         '/adminOthers':(context)=> const AdminOthersPage(),
       },
     );

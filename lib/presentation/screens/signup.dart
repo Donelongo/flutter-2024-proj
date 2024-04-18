@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/password.dart';
 import '../widgets/email.dart';
@@ -25,35 +26,40 @@ class SignupPageState extends State<SignupPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [const Center(child:Text(
-                      'Welcome, new User',
+                      'Welcome, New User',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
                       ),
                     ),
-              ),
+                ),
+                const SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Already have an account?',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 13,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/login');
-                      },
-                      child: const Text(
-                        'Sign in here',
-                        style: TextStyle(
-                          color: Colors.blueGrey,
-                          fontSize: 13,
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          const TextSpan(
+                            text: "Already have an account? ",
+                            style: TextStyle(
+                              color: Colors.black,
+                            )),
+                          TextSpan(
+                              text: 'Sign in Here',
+                              style: const TextStyle(
+                                color: Colors.blueGrey,
+                                decoration: TextDecoration.underline,
+                                ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context, '/login');
+                                }
+                            )
+                          ]
                         ),
                       ),
-                    ),
                   ],
                 ),
                 const SizedBox(height: 20),

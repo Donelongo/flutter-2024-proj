@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,12 +15,12 @@ class HomePage extends StatelessWidget {
         title: Center(
           child: Text(
             'Echo',
-              style: TextStyle(
-                fontFamily: 'Dancing Script',
+            style: GoogleFonts.dancingScript(
+              textStyle: TextStyle(
                 color: Colors.red[500],
                 fontSize: 50,
-                fontWeight: FontWeight.w500,
-              
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
         ),
@@ -50,13 +51,14 @@ class HomePage extends StatelessWidget {
             child: Center(
               child: Text(
                 'Put your notes \n                  here',
-                style: TextStyle(
-                  fontFamily: 'Dancing Script',
+                style: GoogleFonts.dancingScript(
+                  textStyle: TextStyle(
                     color: Colors.red[500],
-                    fontSize: 35,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
+              ),
             ),
           ),
           // Register Here Button
@@ -97,36 +99,45 @@ class HomePage extends StatelessWidget {
           ),
           // Click Here for Admin Button
           Positioned(
-            bottom: 80,
+            bottom: 100,
             left: 0,
             right: 0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/adminLogin');
-                  },
-                  child: const Text(
-                    'Click here',
-                    style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 14,
+                RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: 'Click Here',
+                              style: const TextStyle(
+                                color: Colors.blueGrey,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                                ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Navigator.pushNamed(context, '/admin');
+                                }
+                            ),
+                          const TextSpan(
+                            text: " for Admin",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                const Text(
-                  'for Admin',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+              )
+            ]
+      )
     );
   }
 }

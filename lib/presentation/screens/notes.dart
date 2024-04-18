@@ -8,9 +8,11 @@ import './others.dart';
 class Notepage extends StatefulWidget {
   const Notepage({super.key});
 
+
   @override
   State<Notepage> createState() => NotepageState();
 }
+
 
 class NotepageState extends State<Notepage> with SingleTickerProviderStateMixin {
   List<Note> notes = List.empty(growable: true);
@@ -87,6 +89,7 @@ tabs: const [
             MaterialPageRoute(
                 builder: (context) => AddNote(
                       onNewNoteCreated: onNewNoteCreated,
+                      currentIndex: notes.length,
                     )),
           );
         },
@@ -108,9 +111,9 @@ tabs: const [
     notes.removeAt(index);
     setState(() {});
   }
-  void onNoteEdited(int index, String newTitle, String newBody){
-  notes[index].title = newTitle;
-  notes[index].body = newBody;
+void onNoteEdited(Note note) {
+  notes[note.index].title = note.title;
+  notes[note.index].body = note.body;
   setState(() {});
 }
 }

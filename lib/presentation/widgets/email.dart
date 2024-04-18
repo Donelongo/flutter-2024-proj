@@ -45,7 +45,7 @@ class EmailFieldState extends State<EmailField> {
         decoration: const InputDecoration(
           labelText: 'Email',
           labelStyle: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 87, 85, 85),
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blueGrey),

@@ -1,74 +1,57 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
-import '../addnotes.dart';
 import 'package:digital_notebook/models/note_model.dart';
-import 'package:digital_notebook/presentation/widgets/note_card.dart';
-
 
 class AdminNotepage extends StatefulWidget {
-  const AdminNotepage({super.key});
+  const AdminNotepage({super.key, required this.onNewNoteCreated, required this.currentIndex});
+
+  final Function(Note) onNewNoteCreated;
+  final int currentIndex;
 
   @override
   State<AdminNotepage> createState() => AdminNotepageState();
 }
 
 class AdminNotepageState extends State<AdminNotepage> {
-  List<Note> notes = [];
+  final titleController = TextEditingController();
+  final bodyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: notes.length,
-        itemBuilder: (context, index) {
-          return NotesCard(
-            note: notes[index],
-            index: index,
-            onNoteDeleted: onNoteDeleted,
-            onNoteEdited: onNoteEdited,
-          );
-        },
+      appBar: AppBar(
+        title: const Text(
+          'Add Note',
+          style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddNoteDialog(context);
-        },
-        backgroundColor: Colors.blueGrey,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(hintText: 'Note title'),
+            ),
+            TextField(
+              controller: bodyController,
+              decoration: const InputDecoration(hintText: 'Note body'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final note = Note(
+                  title: titleController.text,
+                  body: bodyController.text,
+                  index: widget.currentIndex,
+                );
+                widget.onNewNoteCreated(note);
+                Navigator.pop(context);
+              },
+              child: const Text('Save Note'),
+            ),
+          ],
         ),
       ),
     );
-  }
-
-  void _showAddNoteDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AddNote(
-          onNewNoteCreated: onNewNoteCreated,
-        );
-      },
-    );
-  }
-
-  void onNewNoteCreated(Note note) {
-    setState(() {
-      notes.add(note);
-    });
-  }
-
-  void onNoteDeleted(int index) {
-    setState(() {
-      notes.removeAt(index);
-    });
-  }
-
-  void onNoteEdited(int index, String newTitle, String newBody) {
-    setState(() {
-      notes[index].title = newTitle;
-      notes[index].body = newBody;
-    });
   }
 }

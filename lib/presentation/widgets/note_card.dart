@@ -8,7 +8,7 @@ class NotesCard extends StatelessWidget {
   final Note note;
   final int index;
   final Function(int) onNoteDeleted;
-  final Function(int, String, String) onNoteEdited;
+  final Function(Note) onNoteEdited;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class NotesCard extends StatelessWidget {
           note: note,
           index: index,
           onNoteDeleted: onNoteDeleted,
-          onNoteEdited: (Note updatedNote) {},
+          onNoteEdited: onNoteEdited,
           Function: (int p1, String p2, String p3) {  },
         ),
         ),
         );
         },
       child: Card(
-              color: Colors.grey[400],
+              color: Colors.grey[700],
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
@@ -35,7 +35,7 @@ class NotesCard extends StatelessWidget {
                     Text(
                       note.title,
                       style: const TextStyle(
-                        fontSize: 20
+                        fontSize: 25,
                       ),
                   ),
                   const SizedBox(height: 10,),
