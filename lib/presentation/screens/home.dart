@@ -14,12 +14,12 @@ class HomePage extends StatelessWidget {
         title: Center(
           child: Text(
             'Echo',
-            style: GoogleFonts.dancingScript(
-              textStyle: TextStyle(
+              style: TextStyle(
+                fontFamily: 'Dancing Script',
                 color: Colors.red[500],
                 fontSize: 50,
-                fontWeight: FontWeight.w400,
-              ),
+                fontWeight: FontWeight.w500,
+              
             ),
           ),
         ),
@@ -50,14 +50,13 @@ class HomePage extends StatelessWidget {
             child: Center(
               child: Text(
                 'Put your notes \n                  here',
-                style: GoogleFonts.dancingScript(
-                  textStyle: TextStyle(
+                style: TextStyle(
+                  fontFamily: 'Dancing Script',
                     color: Colors.red[500],
-                    fontSize: 30,
-                    fontWeight: FontWeight.w400,
+                    fontSize: 35,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
-              ),
             ),
           ),
           // Register Here Button

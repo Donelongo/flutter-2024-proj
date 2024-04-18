@@ -62,6 +62,11 @@ flutter:
           style: italic
         - asset: ./assets/fonts/Mate-Regular.ttf
           style: normal
+    - family: Dancing Script
+      fonts:
+        - asset: ./assets/fonts/DancingScript-Regular.ttf
+          style: normal
+        
 
 
   # The following line ensures that the Material Icons font is
