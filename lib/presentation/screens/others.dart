@@ -31,7 +31,7 @@ class _ViewNotesPage extends StatelessWidget {
     return Scaffold(
       body: Theme(
         data: Theme.of(context).copyWith(
-          dialogBackgroundColor: Colors.grey[900],
+          dialogBackgroundColor: Colors.grey[400],
         ),
         child: ListView.builder(
             itemCount: notes.length,
@@ -73,7 +73,7 @@ class ViewOtherNotesPage extends StatelessWidget {
     return Scaffold(
         body: Theme(
           data: Theme.of(context).copyWith(
-            dialogBackgroundColor: Colors.grey[900],
+            dialogBackgroundColor: Colors.grey[700],
           ),
           child: ListView.builder(
               itemCount: 10,
@@ -102,7 +102,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey[700],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
@@ -117,7 +117,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(8.0),
-        color: Colors.grey[900],
+        color: Colors.white,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -126,6 +126,7 @@ class OthersNoteDetailsDialog extends StatelessWidget {
             noteTitle,
             style: const TextStyle(
               fontSize: 20,
+              color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -136,17 +137,12 @@ class OthersNoteDetailsDialog extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                //   const Text(
-                //   'Lorem ipsum',
-                //     style:  TextStyle(
-                //       fontSize: 16,
-                //     ),
-                //   ),
           const SizedBox(height: 16),
                   const Text(
                   'Cillum tempor aute do esse exercitation nulla tempor. Non laborum enim tempor amet quis minim fugiat. Nulla aliqua consequat duis qui aliquip Lorem.',
                     style:  TextStyle(
                       fontSize: 16,
+                      color: Colors.black,
                     ),
                   ),
           const SizedBox(height: 16),
@@ -178,36 +174,16 @@ class OthersNoteDetailsDialog extends StatelessWidget {
       },
     );
   }
-
-  // void _editNote(BuildContext context, String noteTitle) {
-  //   // Handle edit action
-  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //     content: Text('Edit: $noteTitle'),
-  //   ));
-  // }
-
-  // void _deleteNote(BuildContext context, String noteTitle) {
-  //   // Handle delete action
-  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //     content: Text('Delete: $noteTitle'),
-  //   ));
-  // }
-
-
 class OthersNotesCard extends StatelessWidget {
   final String title;
   final String content;
   final VoidCallback onTap;
-  // final VoidCallback onEdit;
-  // final VoidCallback onDelete;
 
   const OthersNotesCard({
     super.key,
     required this.title,
     required this.content,
     required this.onTap,
-    // required this.onEdit,
-    // required this.onDelete,
   });
 
   @override
