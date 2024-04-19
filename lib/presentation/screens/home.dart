@@ -114,7 +114,7 @@ class HomePage extends StatelessWidget {
                               style: const TextStyle(
                                 color: Colors.blueGrey,
                                 fontSize: 15,
-                                fontWeight: FontWeight.w200,
+                                fontWeight: FontWeight.bold,
                                 decoration: TextDecoration.underline,
                                 ),
                               recognizer: TapGestureRecognizer()
@@ -127,7 +127,8 @@ class HomePage extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 15,
-                              
+                              fontWeight: FontWeight.bold
+
                             ),
                           ),
                         ],
