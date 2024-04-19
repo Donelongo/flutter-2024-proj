@@ -21,7 +21,7 @@ class _AddNoteState extends State<AddNote> {
       appBar: AppBar(
         title: const Text(
           'Add Note',
-          style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w300),
         ),
       ),
       body: Padding(

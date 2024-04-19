@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
               child: const Text(
                 'Register Here',
                 style: TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.w400, fontSize:18 // Black text color
+                  color: Colors.black, fontWeight: FontWeight.w300, fontSize:18 // Black text color
                 ),
               ),
             ),
@@ -114,7 +114,7 @@ class HomePage extends StatelessWidget {
                               style: const TextStyle(
                                 color: Colors.blueGrey,
                                 fontSize: 15,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w200,
                                 decoration: TextDecoration.underline,
                                 ),
                               recognizer: TapGestureRecognizer()
