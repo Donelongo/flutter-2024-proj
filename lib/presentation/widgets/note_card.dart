@@ -1,6 +1,6 @@
 import 'package:digital_notebook/models/note_model.dart';
 import 'package:flutter/material.dart';
-import 'package:digital_notebook/screens/note_view.dart';
+import 'package:digital_notebook/presentation/screens/note_view.dart';
 
 class NotesCard extends StatelessWidget {
   const NotesCard({super.key, required this.note, required this.index, required this.onNoteDeleted, required this.onNoteEdited});
@@ -8,16 +8,25 @@ class NotesCard extends StatelessWidget {
   final Note note;
   final int index;
   final Function(int) onNoteDeleted;
-  final Function(int, String, String) onNoteEdited;
+  final Function(Note) onNoteEdited;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => NoteView(note: note, index: index, onNoteDeleted: onNoteDeleted, onNoteEdited: onNoteEdited,)));
-      },
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+        NoteView(
+          note: note,
+          index: index,
+          onNoteDeleted: onNoteDeleted,
+          onNoteEdited: onNoteEdited,
+          Function: (int p1, String p2, String p3) {  },
+        ),
+        ),
+        );
+        },
       child: Card(
-              color: Colors.grey[900],
+              color: Colors.grey[700],
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
@@ -26,7 +35,7 @@ class NotesCard extends StatelessWidget {
                     Text(
                       note.title,
                       style: const TextStyle(
-                        fontSize: 20
+                        fontSize: 25,
                       ),
                   ),
                   const SizedBox(height: 10,),
@@ -42,6 +51,6 @@ class NotesCard extends StatelessWidget {
                 ),
               ),
             ),
-    );
+        );
+      }
   }
-}

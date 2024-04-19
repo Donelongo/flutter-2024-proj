@@ -26,6 +26,7 @@ class AdminNotepageState extends State<AdminNotepage> {
         ),
       ),
       body: Padding(
+<<<<<<< HEAD
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
@@ -49,6 +50,20 @@ class AdminNotepageState extends State<AdminNotepage> {
               maxLines: null,
             ),
           ElevatedButton(
+=======
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(hintText: 'Note title'),
+            ),
+            TextField(
+              controller: bodyController,
+              decoration: const InputDecoration(hintText: 'Note body'),
+            ),
+            ElevatedButton(
+>>>>>>> 5220c1bf28a8d840d5b1ed86e4d141957539a0a3
               onPressed: () {
                 final note = Note(
                   title: titleController.text,
@@ -60,7 +75,11 @@ class AdminNotepageState extends State<AdminNotepage> {
               },
               child: const Text('Save Note'),
             ),
+<<<<<<< HEAD
           ]
+=======
+          ],
+>>>>>>> 5220c1bf28a8d840d5b1ed86e4d141957539a0a3
         ),
       ),
     );

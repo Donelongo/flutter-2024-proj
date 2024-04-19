@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import './add_activity_dialog.dart';
 import './adminOthers.dart';
 import './adminNotes.dart';
-import 'package:digital_notebook/models/note_model.dart';
-import 'package:digital_notebook/presentation/widgets/note_card.dart';
 
 
 class AdminPage extends StatefulWidget {
@@ -15,7 +13,6 @@ class AdminPage extends StatefulWidget {
 
 class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixin {
   List<Activity> activities = [];
-  List<Note> notes = List.empty(growable: true);
   TextEditingController activityController = TextEditingController();
   TextEditingController userController = TextEditingController();
   DateTime? _selectedDateTime;
@@ -92,41 +89,24 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
               );
             },
           ),
-        ListView.builder(
-            itemCount: notes.length,
-            itemBuilder: (BuildContext context, int index) {
-              return NotesCard(
-                note: notes[index],
-                index: index,
-                onNoteDeleted: onNoteDeleted,
-                onNoteEdited: onNoteEdited,
-              );
+          // Notes page content
+          AdminNotepage(onNewNoteCreated: (note) {
+            //do Nothing
             },
-          ),
+            currentIndex: 0,
+            ),
+          // Other People page content
           const AdminOthersPage(),
         ],
       ),
-      floatingActionButton: _tabController.index <= 1 // Show FAB on the first and second tabs
-    ? FloatingActionButton(
-        onPressed: () {
-          // Change this to navigate to a different page based on the active tab
-          if (_tabController.index == 0) {
-            _showAddActivityDialog(context);
-          } else if (_tabController.index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AdminNotepage(
-                        onNewNoteCreated: onNewNoteCreated,
-                        currentIndex: notes.length,
-                      )),
-            );
-          }
-        },
-        backgroundColor: Colors.blueGrey,
-        child: const Icon(Icons.add, color: Colors.white),
-      )
-    : null,
+      floatingActionButton: _tabController.index == 0 // Show FAB only on the home page
+          ? FloatingActionButton(
+              onPressed: () {
+                _showAddActivityDialog(context);
+              }, backgroundColor: Colors.blueGrey,
+              child: const Icon(Icons.add, color: Colors.white),
+            )
+          : null,
       bottomNavigationBar: TabBar(
         controller: _tabController, // Assign TabController to TabBar
         tabs: const [
@@ -234,20 +214,6 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
       activities.removeAt(index);
     });
   }
-  void onNewNoteCreated(Note note){
-    notes.add(note);
-    setState((){});
-    }
-
-  void onNoteDeleted(int index){
-    notes.removeAt(index);
-    setState(() {});
-  }
-  void onNoteEdited(Note note) {
-  notes[note.index].title = note.title;
-  notes[note.index].body = note.body;
-  setState(() {});
-}
 }
 
 class Activity {
