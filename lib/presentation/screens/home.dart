@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                 style: GoogleFonts.dancingScript(
                   textStyle: TextStyle(
                     color: Colors.red[500],
-                    fontSize: 30,
+                    fontSize: 35,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -99,7 +99,7 @@ class HomePage extends StatelessWidget {
           ),
           // Click Here for Admin Button
           Positioned(
-            bottom: 100,
+            bottom: 90,
             left: 0,
             right: 0,
             child: Row(
@@ -119,7 +119,7 @@ class HomePage extends StatelessWidget {
                                 ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.pushNamed(context, '/admin');
+                                  Navigator.pushNamed(context, '/adminLogin');
                                 }
                             ),
                           const TextSpan(
@@ -127,7 +127,7 @@ class HomePage extends StatelessWidget {
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              
                             ),
                           ),
                         ],
