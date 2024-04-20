@@ -51,8 +51,13 @@ class NoteViewState extends State<NoteView> {
                     title: const Text("Delete Note ?",
                     style: TextStyle(
                       color:Colors.white,
-                    ),),
-                    content: Text("Note '${titleController.text}' will be deleted!"),
+                    ),
+                    ),
+                    content: Text("Note '${titleController.text}' will be deleted!",
+                    style: const TextStyle(
+                      color: Colors.white
+                    ),
+                    ),
                     actions:[
                       TextButton(
                         onPressed: (){

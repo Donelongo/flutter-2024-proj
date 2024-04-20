@@ -98,7 +98,11 @@ class SignupPageState extends State<SignupPage> {
                               color: Colors.white
                               ),
                             ),
-                            content: const Text('Please enter a valid email address.'),
+                            content: const Text('Please enter a valid email address.',
+                              style: TextStyle(
+                              color: Colors.white
+                              ),
+                            ),
                             backgroundColor: Colors.grey[900],
                             actions: [
                               TextButton(

@@ -19,17 +19,17 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
   TextEditingController activityController = TextEditingController();
   TextEditingController userController = TextEditingController();
   DateTime? _selectedDateTime;
-  late TabController _tabController; 
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this); 
-    _tabController.addListener(_handleTabSelection); 
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(_handleTabSelection);
   }
 
   void _handleTabSelection() {
-    setState(() {}); 
+    setState(() {});
   }
 
   @override
@@ -39,9 +39,9 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
         title: const Text('Admin', style: TextStyle(fontSize: 25) ,),
       ),
       body: TabBarView(
-        controller: _tabController, 
+        controller: _tabController,
         children: [
-          
+
           ListView.builder(
             itemCount: activities.length,
             itemBuilder: (BuildContext context, int index) {
@@ -61,11 +61,49 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
                           },
                         ),
                         IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () {
-                            _deleteActivity(index);
-                          },
-                        ),
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: Colors.grey[900],
+                    title: const Text("Delete Note ?",
+                    style: TextStyle(
+                      color:Colors.white,
+                    ),
+                    ),
+                    content: Text("Activity '${activities[index].user}' will be deleted!",
+                    style: const TextStyle(
+                      color: Colors.white
+                    ),
+                    ),
+                    actions:[
+                      TextButton(
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Cancel"),
+                      ),
+                      TextButton(
+                        onPressed: (){
+                          _deleteActivity(index);
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Delete"),
+                      ),
+                    ]
+                  );
+                }
+              );
+            },
+          ),
+                        // IconButton(
+                        //   icon: const Icon(Icons.delete),
+                        //   onPressed: () {
+                        //     _deleteActivity(index);
+                        //   },
+                        // ),
                       ],
                     ),
                   ),
@@ -106,7 +144,7 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
           const AdminOthersPage(),
         ],
       ),
-      floatingActionButton: _tabController.index <= 1 
+      floatingActionButton: _tabController.index <= 1
     ? FloatingActionButton(
         onPressed: () {
           if (_tabController.index == 0) {
@@ -222,14 +260,14 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
       var editedActivity = activities[index];
       editedActivity.user = newUser;
       editedActivity.name = newName;
-      editedActivity.logs.add('Edited at ${DateTime.now()}'); 
+      editedActivity.logs.add('Edited at ${DateTime.now()}');
     });
   }
 
   void _deleteActivity(int index) {
     setState(() {
       var deletedActivity = activities[index];
-      deletedActivity.logs.add('Deleted at ${DateTime.now()}'); 
+      deletedActivity.logs.add('Deleted at ${DateTime.now()}');
       activities.removeAt(index);
     });
   }

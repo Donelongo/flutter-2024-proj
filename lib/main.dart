@@ -33,13 +33,17 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = buildThemeData();
-    
+    buildThemeData();
     return MaterialApp(
       themeMode: currentThemeMode == ThemeModeOption.dark
           ? ThemeMode.dark
           : ThemeMode.light,
-      theme: themeData,
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(color: Colors.black),
+          bodyText2: TextStyle(color: Colors.black),
+        ),
+      ),
       darkTheme: ThemeData.dark(),
       initialRoute: '/',
       routes: {
@@ -52,7 +56,6 @@ class MyAppState extends State<MyApp> {
         '/adminLogin':(context) => const AdminLoginPage(),
         '/adminNotes': (context) => AdminNotepage(
             onNewNoteCreated: (note) {
-              
             },
             currentIndex: 0,
           ),
