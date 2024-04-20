@@ -34,7 +34,7 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = buildThemeData();
-     // Build theme data dynamically
+    
     return MaterialApp(
       themeMode: currentThemeMode == ThemeModeOption.dark
           ? ThemeMode.dark
