@@ -19,17 +19,17 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
   TextEditingController activityController = TextEditingController();
   TextEditingController userController = TextEditingController();
   DateTime? _selectedDateTime;
-  late TabController _tabController; // Define TabController
+  late TabController _tabController; 
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this); // Initialize TabController
-    _tabController.addListener(_handleTabSelection); // Add listener for tab selection
+    _tabController = TabController(length: 3, vsync: this); 
+    _tabController.addListener(_handleTabSelection); 
   }
 
   void _handleTabSelection() {
-    setState(() {}); // Update the state when a tab is selected
+    setState(() {}); 
   }
 
   @override
@@ -39,9 +39,9 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
         title: const Text('Admin', style: TextStyle(fontSize: 25) ,),
       ),
       body: TabBarView(
-        controller: _tabController, // Assign TabController to TabBarView
+        controller: _tabController, 
         children: [
-          // Current page content (AdminHomePage)
+          
           ListView.builder(
             itemCount: activities.length,
             itemBuilder: (BuildContext context, int index) {
@@ -106,10 +106,9 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
           const AdminOthersPage(),
         ],
       ),
-      floatingActionButton: _tabController.index <= 1 // Show FAB on the first and second tabs
+      floatingActionButton: _tabController.index <= 1 
     ? FloatingActionButton(
         onPressed: () {
-          // Change this to navigate to a different page based on the active tab
           if (_tabController.index == 0) {
             _showAddActivityDialog(context);
           } else if (_tabController.index == 1) {
@@ -128,7 +127,7 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
       )
     : null,
       bottomNavigationBar: TabBar(
-        controller: _tabController, // Assign TabController to TabBar
+        controller: _tabController, 
         tabs: const [
           Tab(icon: Icon(Icons.history, color:Colors.blueGrey), text: 'History',), // Current page
           Tab(icon: Icon(Icons.notes, color:Colors.blueGrey), text: 'Notes',), // Notes page
@@ -164,7 +163,7 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
         name: activityName,
         date: '${dateTime.year}-${dateTime.month}-${dateTime.day}',
         time: '${dateTime.hour}:${dateTime.minute}',
-        logs: ['Added at ${DateTime.now()}'], // Log entry for adding the activity
+        logs: ['Added at ${DateTime.now()}'], 
       ));
     });
   }
@@ -223,14 +222,14 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
       var editedActivity = activities[index];
       editedActivity.user = newUser;
       editedActivity.name = newName;
-      editedActivity.logs.add('Edited at ${DateTime.now()}'); // Log entry for editing the activity
+      editedActivity.logs.add('Edited at ${DateTime.now()}'); 
     });
   }
 
   void _deleteActivity(int index) {
     setState(() {
       var deletedActivity = activities[index];
-      deletedActivity.logs.add('Deleted at ${DateTime.now()}'); // Log entry for deleting the activity
+      deletedActivity.logs.add('Deleted at ${DateTime.now()}'); 
       activities.removeAt(index);
     });
   }
