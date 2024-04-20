@@ -101,7 +101,7 @@ class AddActivityDialogState extends State<AddActivityDialog> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
+      lastDate: DateTime.now(),
     );
     if (pickedDateTime != null) {
       final TimeOfDay? pickedTime = await showTimePicker(
@@ -127,5 +127,6 @@ class AddActivityDialogState extends State<AddActivityDialog> {
     return widget.userController.text.isNotEmpty &&
         widget.activityController.text.isNotEmpty &&
         _selectedDateTime != null;
+        
   }
 }
