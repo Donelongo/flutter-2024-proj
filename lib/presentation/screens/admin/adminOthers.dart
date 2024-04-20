@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 class _Note {
   final String title;
@@ -7,9 +7,9 @@ class _Note {
   _Note({required this.title, required this.content});
 }
 
-// ignore: unused_element
+
 class _AdminOthersPage extends StatelessWidget {
-  // Sample list of notes (replace with your data)
+
   final List<_Note> notes = [
     _Note(
       title: 'Note 1',
@@ -187,21 +187,19 @@ class OthersNotesCard extends StatelessWidget {
   final String title;
   final String content;
   final VoidCallback onTap;
-  // final VoidCallback onEdit;
-  // final VoidCallback onDelete;
+
 
   const OthersNotesCard({
     super.key,
     required this.title,
     required this.content,
     required this.onTap,
-    // required this.onEdit,
-    // required this.onDelete,
+   
   });
 
   @override
   Widget build(BuildContext context) {
-    // Return a widget here, for example:
+
     return Card(
       child: ListTile(
         title: Text(title),

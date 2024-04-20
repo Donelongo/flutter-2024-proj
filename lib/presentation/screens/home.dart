@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // Background Image
+          
           Positioned(
             top: 0,
             left: 0,
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          // Slogan
+         
           Positioned(
             top: 400,
             left: 0,
@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          // Register Here Button
+          
           Positioned(
             top: 500,
             left: 50,
@@ -71,33 +71,33 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/signup');
               },
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all<Size> (const Size(150, 50)), // Adjusted button size
+                minimumSize: MaterialStateProperty.all<Size> (const Size(150, 50)), 
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
                     if (states.contains(MaterialState.pressed)) {
                       return Colors.blueGrey.withOpacity(0.9);
                     }
-                    return Colors.white; // Use white color as the default button color
+                    return Colors.white; 
                   },
                 ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(180),
-                    side: const BorderSide(color: Colors.blueGrey, width: 2), // Red border, adjusted width
+                    side: const BorderSide(color: Colors.blueGrey, width: 2), 
                   ),
                 ),
-                elevation: MaterialStateProperty.all<double>(5), // Increased elevation
-                shadowColor: MaterialStateProperty.all<Color>(Colors.grey.withOpacity(0.5)), // Shadow color
+                elevation: MaterialStateProperty.all<double>(5), 
+                shadowColor: MaterialStateProperty.all<Color>(Colors.grey.withOpacity(0.5)), 
               ),
               child: const Text(
                 'Register Here',
                 style: TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.w300, fontSize:18 // Black text color
+                  color: Colors.black, fontWeight: FontWeight.w300, fontSize:18 
                 ),
               ),
             ),
           ),
-          // Click Here for Admin Button
+          
           Positioned(
             bottom: 90,
             left: 0,

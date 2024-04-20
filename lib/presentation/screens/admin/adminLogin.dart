@@ -8,11 +8,11 @@ class AdminLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
+ // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushNamed(context, '/');
-        return false; // Prevents the default behavior
+        return false; 
       },
       child: Scaffold(
           appBar: AppBar(

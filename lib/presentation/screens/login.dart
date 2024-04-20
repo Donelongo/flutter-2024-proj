@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushNamed(context, '/');
-        return false; // Prevents the default behavior
+        return false;
       },
       child: Scaffold(
           appBar: AppBar(

@@ -8,7 +8,7 @@ class _Note {
 
 // ignore: unused_element
 class _ViewNotesPage extends StatelessWidget {
-  // Sample list of notes (replace with your data)
+  
   final List<_Note> notes = [
     _Note(
       title: 'Note 1',
@@ -188,7 +188,7 @@ class OthersNotesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Return a widget here, for example:
+    
     return Card(
       child: ListTile(
         title: Text(title),

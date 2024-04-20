@@ -52,7 +52,7 @@ class MyAppState extends State<MyApp> {
         '/adminLogin':(context) => const AdminLoginPage(),
         '/adminNotes': (context) => AdminNotepage(
             onNewNoteCreated: (note) {
-              // Do nothing
+              
             },
             currentIndex: 0,
           ),
