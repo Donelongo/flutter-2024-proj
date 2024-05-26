@@ -71,8 +71,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                     const EmailField(),
                     const SizedBox(height: 20),
-                    const PasswordWidget(
-                    ),
+                    const PasswordWidget(),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
@@ -87,5 +86,6 @@ class LoginPage extends StatelessWidget {
           ),
         ),
     );
+
   }
 }

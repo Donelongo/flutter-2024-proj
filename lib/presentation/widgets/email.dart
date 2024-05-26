@@ -1,63 +1,34 @@
 import 'package:flutter/material.dart';
 
-class EmailField extends StatefulWidget {
-  const EmailField({super.key});
+class EmailField extends StatelessWidget {
+  final TextEditingController email;
 
-  @override
-  EmailFieldState createState() => EmailFieldState();
-}
-
-class EmailFieldState extends State<EmailField> {
-  final TextEditingController emailController = TextEditingController();
-  bool _isValid = false;
-
-  @override
-  void initState() {
-    super.initState();
-    emailController.addListener(_validateEmail);
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    super.dispose();
-  }
-
-  void _validateEmail() {
-    final email = emailController.text.trim();
-    final isValid = email.isNotEmpty && email.contains('@') && email.contains('.');
-    setState(() {
-      _isValid = isValid;
-    });
-  }
-
-  bool isSignUpEnabled() {
-    return _isValid;
-  }
+  const EmailField({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 57,
-      padding: const EdgeInsets.all(1),
-      child: TextField(
-        controller: emailController,
-        decoration: const InputDecoration(
-          labelText: 'Email',
-          labelStyle: TextStyle(
-            color: Color.fromARGB(255, 87, 85, 85),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.blueGrey),
-          ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('Email'),
+        const SizedBox(
+          height: 10,
         ),
-        style: const TextStyle(
-          fontFamily: 'San Serif',
-          fontSize: 16,
-          color: Colors.black,
-        ),
-        onChanged: (_) => _validateEmail(),
-      ),
+        Container(
+            alignment: Alignment.centerLeft,
+            height: 60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15), color: Colors.white),
+            child: TextFormField(
+              controller: email,
+              keyboardType: TextInputType.emailAddress,
+              style: const TextStyle(color: Colors.black),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.only(top: 7, left: 10),
+              ),
+            ))
+      ],
     );
   }
 }

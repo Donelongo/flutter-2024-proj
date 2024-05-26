@@ -64,7 +64,7 @@ class AdminLoginPage extends StatelessWidget {
                     ),
                   ],
                     ),
-                    const EmailField(),
+                    const EmailField(email: state.email);,
                     const SizedBox(height: 20),
                     const PasswordWidget(
                     ),

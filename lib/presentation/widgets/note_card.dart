@@ -51,6 +51,6 @@ class NotesCard extends StatelessWidget {
                 ),
               ),
             ),
-        );
+        ); 
       }
   }

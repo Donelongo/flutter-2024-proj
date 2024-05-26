@@ -1,4 +1,5 @@
 // ignore_for_file: deprecated_member_use
+import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/home.dart';
 import 'package:digital_notebook/presentation/screens/admin/admin.dart';
@@ -9,6 +10,7 @@ import 'package:digital_notebook/presentation/screens/login.dart';
 import 'package:digital_notebook/presentation/screens/signup.dart';
 import 'package:digital_notebook/presentation/screens/notes.dart';
 import 'package:digital_notebook/presentation/screens/others.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum ThemeModeOption {
   white,
@@ -34,7 +36,15 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     buildThemeData();
-    return MaterialApp(
+    return MultiBlocProvider(
+        providers:[
+          BlocProvider(
+            create: ((context) =>
+              AuthenticationBloc()
+              ))],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+
       themeMode: currentThemeMode == ThemeModeOption.dark
           ? ThemeMode.dark
           : ThemeMode.light,
@@ -49,7 +59,7 @@ class MyAppState extends State<MyApp> {
       routes: {
         '/': (context) => const HomePage(),
         '/admin': (context) => const AdminPage(),
-        'other': (context)=> const ViewOtherNotesPage(),
+        '/other': (context)=> const ViewOtherNotesPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
         '/notes': (context) => const Notepage(),
@@ -61,6 +71,7 @@ class MyAppState extends State<MyApp> {
           ),
         '/adminOthers':(context)=> const AdminOthersPage(),
       },
+      ),
     );
   }
 
