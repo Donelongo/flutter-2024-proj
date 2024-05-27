@@ -8,8 +8,10 @@ abstract class AuthenticationEvent extends Equatable {
 }
 class LoginSubmit extends AuthenticationEvent{}
 
-class RequestPageLoad extends AuthenticationEvent {}
-
+class RequestPageLoad extends AuthenticationEvent {
+  @override
+  List<Object> get props => [];
+}
 class OnSubmitEvent extends AuthenticationEvent {}
 
 class AccountCreation extends AuthenticationEvent {}

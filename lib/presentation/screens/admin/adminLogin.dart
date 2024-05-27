@@ -19,7 +19,7 @@ class AdminLoginPage extends StatelessWidget {
         listener: (context, state){
             if (state is AuthenticationSuccess) {
                 // go to where you want
-                Navigator.pushNamed(context, '/');
+                Navigator.pushNamed(context, '/admin');
             }
         },
 
@@ -78,8 +78,8 @@ class AdminLoginPage extends StatelessWidget {
                                                   fontSize: 13,
                                                   ),
                                               ),
-                                    ),
-                                    ],
+                                            ),
+                                        ],
                                     ),
                                     EmailField(email: state.email),
                                     const SizedBox(height: 20),

@@ -10,21 +10,31 @@ part 'authentication_state.dart';
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc(): super(AuthenticationInitial()){
     on<LoginSubmit>(_handleAuthentication);
+    on<RequestPageLoad>(_handleRequestPageLoad);
   }
 
-    _handleAuthentication(event, emit){
-        if (state is AuthenticationDefault){
-            final authState = state as AuthenticationDefault;
-            // Have a dummy login info
-            const String dummyEmail = "a@a.com";
-            const String dummyPassword = "12345678";
+  _handleAuthentication(event, emit){
+    if (state is AuthenticationDefault){
+      final authState = state as AuthenticationDefault;
+      // Have a dummy login info
+      const String dummyEmail = "a@a.com";
+      const String dummyPassword = "12345678";
 
-            final actualEmail = authState.email;
-            final actualPassword = authState.password.text;
+      final actualEmail = authState.email;
+      final actualPassword = authState.password.text;
 
-          // ignore: unrelated_type_equality_checks
-          if (actualEmail == dummyEmail && actualPassword == dummyPassword) { emit(AuthenticationSuccess()); }
-          else{ emit(AuthenticationDefault(email: TextEditingController(), password: TextEditingController(), error: AuthenticationError.Input));}
+      // ignore: unrelated_type_equality_checks
+      if (actualEmail == dummyEmail && actualPassword == dummyPassword) {
+        emit(AuthenticationSuccess());
+      } else {
+        emit(AuthenticationDefault(email: TextEditingController(), password: TextEditingController(), error: AuthenticationError.Input));
       }
     }
+  }
+
+  _handleRequestPageLoad(event, emit){
+    // emit(PageLoading());
+    // Future.delayed(const Duration(seconds: 2), () {
+    // });
+  }
 }

@@ -1,19 +1,43 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/password.dart';
 import '../widgets/email.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
+    final bloc = context.read<AuthenticationBloc>();
+    // Doing this so that it wont remember the state it was in when someone logs out or something
+    bloc.add(RequestPageLoad());
+    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state){
+            if (state is AuthenticationSuccess) {
+                // go to where you want
+                Navigator.pushNamed(context, '/');
+            }
+        },
+
+        builder: (context, state) {
+
+        if (state is AuthenticationInitial){
+        return const Scaffold(
+                body: Center(child: CupertinoActivityIndicator())
+                );
+        }
+        else if(state is AuthenticationDefault){
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/notes');
         return false;
       },
+
       child: Scaffold(
           appBar: AppBar(
             title: const Text('Login',
@@ -69,13 +93,13 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 20),
-                    const EmailField(),
+                    EmailField(email: state.email),
                     const SizedBox(height: 20),
                     const PasswordWidget(),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/notes');
+                        bloc.add(OnSubmitEvent());
                       },
                       child: const Text('Login', style:TextStyle(color: Colors.blueGrey)),
                     ),
@@ -84,8 +108,15 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-        ),
-    );
+        )
+      );
+    }else{
+      return const Scaffold(
+        body: Center(child: CupertinoActivityIndicator(),),
+      );
+    }
+  }
+  );
 
   }
 }

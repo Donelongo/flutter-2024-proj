@@ -2,19 +2,38 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/password.dart';
 import '../widgets/email.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
 
-class SignupPage extends StatefulWidget {
+
+class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
 
-  @override
-  SignupPageState createState() => SignupPageState();
-}
-
-class SignupPageState extends State<SignupPage> {
-  final GlobalKey<EmailFieldState> _emailFieldKey = GlobalKey<EmailFieldState>();
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<AuthenticationBloc>();
+      // Doing this so that it wont remember the state it was in when someone logs out or something
+      bloc.add(RequestPageLoad());
+
+    return BlocConsumer<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state){
+            if (state is AuthenticationSuccess) {
+                // go to where you want
+                Navigator.pushNamed(context, '/notes');
+            }
+        },
+
+        builder: (context, state) {
+
+        if (state is AuthenticationInitial){
+        return const Scaffold(
+                body: Center(child: CupertinoActivityIndicator())
+                );
+        }
+        else if(state is AuthenticationDefault){
+
     return Scaffold(
       appBar: AppBar(),
       body: Center(
@@ -63,7 +82,7 @@ class SignupPageState extends State<SignupPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                EmailField(key: _emailFieldKey),
+                EmailField(email: state.email),
                 const SizedBox(height: 10),
                 const TextField(
                   decoration: InputDecoration(
@@ -85,9 +104,9 @@ class SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    final isValidEmail = _emailFieldKey.currentState?.isSignUpEnabled() ?? false;
-                    if (isValidEmail) {
-                      Navigator.pushNamed(context, '/notes');
+                    // final isValidEmail = _emailFieldKey.currentState?.isSignUpEnabled() ?? false;
+                    if (state is AuthenticationSuccess) {state.email;
+                      bloc.add(OnSubmitEvent());
                     } else {
                       showDialog(
                         context: context,
@@ -132,5 +151,12 @@ class SignupPageState extends State<SignupPage> {
         ),
       ),
     );
-  }
+    }else{
+        return const Scaffold(
+          body: Center(child: CupertinoActivityIndicator(),)
+        );
+      }
+    }
+  );
+}
 }

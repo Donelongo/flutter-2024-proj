@@ -29,4 +29,7 @@ class AuthenticationDefault extends AuthenticationState {
 }
 
 class AuthenticationAccountCreate extends AuthenticationState{}
+
+class PageLoading extends AuthenticationState {}
+
 enum AuthenticationError { Network, Input, None }
