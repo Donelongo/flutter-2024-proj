@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, constant_identifier_names
 import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/home.dart';
@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum ThemeModeOption {
   white,
-  // ignore: constant_identifier_names
   Sepia,
   dark,
 }

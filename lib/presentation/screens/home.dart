@@ -1,5 +1,7 @@
+import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -8,6 +10,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<AuthenticationBloc, AuthenticationState>(
+  builder: (context, state) {
+    if (state is PageLoading) {
+      return const CircularProgressIndicator(); // Show a loading spinner
+    } else if (state is PageLoaded) {
+      return const Text('Page Loaded'); // Show some content
+    } else {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -28,7 +37,7 @@ class HomePage extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          
+
           Positioned(
             top: 0,
             left: 0,
@@ -43,7 +52,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-         
+
           Positioned(
             top: 400,
             left: 0,
@@ -61,7 +70,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          
+
           Positioned(
             top: 500,
             left: 50,
@@ -71,33 +80,33 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/signup');
               },
               style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all<Size> (const Size(150, 50)), 
+                minimumSize: MaterialStateProperty.all<Size> (const Size(150, 50)),
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
                   (Set<MaterialState> states) {
                     if (states.contains(MaterialState.pressed)) {
                       return Colors.blueGrey.withOpacity(0.9);
                     }
-                    return Colors.white; 
+                    return Colors.white;
                   },
                 ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(180),
-                    side: const BorderSide(color: Colors.blueGrey, width: 2), 
+                    side: const BorderSide(color: Colors.blueGrey, width: 2),
                   ),
                 ),
-                elevation: MaterialStateProperty.all<double>(5), 
-                shadowColor: MaterialStateProperty.all<Color>(Colors.grey.withOpacity(0.5)), 
+                elevation: MaterialStateProperty.all<double>(5),
+                shadowColor: MaterialStateProperty.all<Color>(Colors.grey.withOpacity(0.5)),
               ),
               child: const Text(
                 'Register Here',
                 style: TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.w300, fontSize:18 
+                  color: Colors.black, fontWeight: FontWeight.w300, fontSize:18
                 ),
               ),
             ),
           ),
-          
+
           Positioned(
             bottom: 90,
             left: 0,
@@ -140,5 +149,8 @@ class HomePage extends StatelessWidget {
             ]
       )
     );
+  }
+  }
+  );
   }
 }

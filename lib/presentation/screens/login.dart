@@ -95,7 +95,7 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                     EmailField(email: state.email),
                     const SizedBox(height: 20),
-                    const PasswordWidget(),
+                    PasswordWidget(passwordController: state.passwordController),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
