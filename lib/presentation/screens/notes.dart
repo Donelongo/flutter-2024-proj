@@ -83,15 +83,19 @@ tabs: const [
       ),
     floatingActionButton: _tabController.index == 0
     ? FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final result = await Navigator.pushNamed(
             context,
-            MaterialPageRoute(
-                builder: (context) => AddNote(
-                      onNewNoteCreated: onNewNoteCreated,
-                      currentIndex: notes.length,
-                    )),
+            '/addNote'
           );
+          debugPrint('i ahve arrivbed here111111111111111111');
+          debugPrint('$result');
+          if (result != null && result is Map) {
+            debugPrint('i ahve arrivbed here');
+            final title = result['noteTitle'];
+            final body = result['noteBody'];
+            debugPrint('$title, $body');
+          }
         },
         backgroundColor: Colors.blueGrey,
         child: const Icon(

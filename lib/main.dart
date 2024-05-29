@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use, constant_identifier_names
 import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
 import 'package:digital_notebook/account/blocs/signup_bloc/signup_bloc/signup_bloc.dart';
+import 'package:digital_notebook/bloc/add_note_bloc.dart';
+import 'package:digital_notebook/presentation/screens/addnotes.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/home.dart';
 import 'package:digital_notebook/presentation/screens/admin/admin.dart';
@@ -39,7 +41,8 @@ class MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: ((context) => AuthenticationBloc())),
-        BlocProvider(create: (context) => SignupBloc())
+        BlocProvider(create: (context) => SignupBloc()),
+        BlocProvider(create: (context) => AddNoteBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -53,7 +56,7 @@ class MyAppState extends State<MyApp> {
           ),
         ),
         darkTheme: ThemeData.dark(),
-        initialRoute: '/signup',
+        initialRoute: '/',
         routes: {
           '/': (context) => const HomePage(),
           '/admin': (context) => const AdminPage(),
@@ -67,6 +70,7 @@ class MyAppState extends State<MyApp> {
                 currentIndex: 0,
               ),
           '/adminOthers': (context) => const AdminOthersPage(),
+          '/addNote': (context) => const AddNote(),
         },
       ),
     );
