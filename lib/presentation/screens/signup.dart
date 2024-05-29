@@ -14,6 +14,7 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<SignupBloc>();
     return BlocProvider(
       create: (context) => SignupBloc(),
       child: BlocConsumer<SignupBloc, SignupState>(
@@ -25,7 +26,7 @@ class SignupPage extends StatelessWidget {
           return const Scaffold(
             body: Center(child: CupertinoActivityIndicator()),
           );
-        } else if (state is AuthenticationDefault) {
+        } else if (state is SignupBloc) {
           return Scaffold(
             appBar: AppBar(),
             body: Center(
