@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
         listener: (context, state){
             if (state is AuthenticationSuccess) {
                 // go to where you want
-                Navigator.pushNamed(context, '/');
+                Navigator.pushNamed(context, '/notes');
             }
         },
 
@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
         else if(state is AuthenticationDefault){
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamed(context, '/notes');
+        Navigator.pushNamed(context, '/signup');
         return false;
       },
 
@@ -95,11 +95,14 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20),
                     EmailField(email: state.email),
                     const SizedBox(height: 20),
-                    PasswordWidget(passwordController: state.passwordController),
+                    PasswordWidget(passwordController: state.password),
                     const SizedBox(height: 20),
+                    if (state.error == AuthenticationError.Input)
+                      const Text('Invvalid email or paswword',
+                      style: TextStyle(color:Colors.red),),
                     ElevatedButton(
                       onPressed: () {
-                        bloc.add(OnSubmitEvent());
+                        bloc.add(LoginSubmit());
                       },
                       child: const Text('Login', style:TextStyle(color: Colors.blueGrey)),
                     ),

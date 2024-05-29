@@ -13,48 +13,52 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<OnSignupSubmit>(_handleSubmit);
   }
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  @override
-  Future<void> close() {
-    emailController.dispose();
-    // passwordController.dispose();
-    return super.close();
-  }
-
-  void _requestSignupPage(RequestPageLoad event, Emitter<SignupState> emit) {
+  void _requestSignupPage(RequestPageLoad event, Emitter<SignupState> emit)async {
     emit(SignupLoading());
-    emit(SignupDefault(
-      email: emailController,
-      password: passwordController,
+    await Future.delayed(const Duration(seconds: 2));    emit(SignupDefault(
+      email: TextEditingController(),
+      password: TextEditingController(),
+      userName: TextEditingController(),
       error: SignupError.none,
     ));
   }
 
-  Future<void> _handleSubmit(OnSignupSubmit event, Emitter<SignupState> emit) async {
-    emit(SignupLoading());
-
+  Future<void> _handleSubmit(
+      OnSignupSubmit event, Emitter<SignupState> emit) async {
+    if(state is SignupDefault){
+      final signupstate = state as SignupDefault;
     // call the api here
     await Future.delayed(const Duration(seconds: 2));
+    debugPrint('User is being registered ${signupstate.email.text}');
+    debugPrint('User is being registered ${signupstate.userName.text}');
+    debugPrint('User is being registered ${signupstate.password.text}');
 
-    bool successfullyRegisteredUser = await _fakeSignupApiCall();
 
-    if (successfullyRegisteredUser) {
+    bool successfullyRegisteredUser = signupstate.userName.text != 'Hello';
+    bool hasSameEmail = signupstate.email.text == 'a@a.a';
+
+    if (successfullyRegisteredUser && !hasSameEmail) {
       emit(SignupSuccess());
-    } else {
+    } else if (hasSameEmail){
       emit(
         SignupDefault(
-          email: emailController,
-          password: passwordController,
+          email: TextEditingController(),
+          password: TextEditingController(),
+          userName: TextEditingController(),
           error: SignupError.input,
         ),
       );
     }
-  }
-
-  Future<bool> _fakeSignupApiCall() async {
-    // Simulate API call here
-    return Future.delayed(const Duration(seconds: 1), () => true); // Change to actual API call
+    else{
+      emit(
+        SignupDefault(
+          email: TextEditingController(),
+          password: TextEditingController(),
+          userName: TextEditingController(),
+          error: SignupError.userNameInput,
+        ),
+      );
+    }
+    }
   }
 }

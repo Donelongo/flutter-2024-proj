@@ -83,7 +83,7 @@ class AdminLoginPage extends StatelessWidget {
                       ),
                       EmailField(email: state.email),
                       const SizedBox(height: 20),
-                      PasswordWidget(passwordController: state.passwordController),
+                      PasswordWidget(passwordController: state.password),
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {

@@ -14,11 +14,13 @@ class SignupLoading extends SignupState {}
 class SignupDefault extends SignupState {
   final TextEditingController email;
   final TextEditingController password;
+  final TextEditingController userName;
   final SignupError error;
 
   const SignupDefault({
     required this.email,
     required this.password,
+    required this.userName,
     required this.error,
   });
 
@@ -28,4 +30,4 @@ class SignupDefault extends SignupState {
 
 class SignupSuccess extends SignupState {}
 
-enum SignupError { none, input, network }
+enum SignupError { none, input, network, userNameInput}

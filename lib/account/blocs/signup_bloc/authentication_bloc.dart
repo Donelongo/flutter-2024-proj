@@ -25,23 +25,19 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     final actualEmail = authState.email.text; // Get the email string
     final actualPassword = authState.password.text;
 
-    if (_isValidEmail(actualEmail)) {
+            debugPrint('this is the debug orint.......................111111..');
+
       if (actualEmail == dummyEmail && actualPassword == dummyPassword) {
+        debugPrint('this is the debug orint.........................');
         emit(AuthenticationSuccess());
       } else {
         emit(AuthenticationDefault(
             email: TextEditingController(),
             password: TextEditingController(),
-            passwordController: TextEditingController(), // Add this line
-            error: AuthenticationError.InvalidCredentials));
+
+            error: AuthenticationError.Input));
       }
-    } else {
-      emit(AuthenticationDefault(
-          email: TextEditingController(),
-          password: TextEditingController(),
-          passwordController: TextEditingController(), // Add this line
-          error: AuthenticationError.InvalidEmailFormat));
-    }
+
   }
 }
 
@@ -57,8 +53,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     emit(AuthenticationDefault(
         email: TextEditingController(),
         password: TextEditingController(),
-        passwordController: TextEditingController(), // Add this line
-        error: AuthenticationError.Input));
+        error: AuthenticationError.None));
   }
 
   _handleAccountCreation(event, emit) async {

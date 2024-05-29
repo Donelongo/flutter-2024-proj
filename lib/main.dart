@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, constant_identifier_names
 import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
+import 'package:digital_notebook/account/blocs/signup_bloc/signup_bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/home.dart';
 import 'package:digital_notebook/presentation/screens/admin/admin.dart';
@@ -36,40 +37,37 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     buildThemeData();
     return MultiBlocProvider(
-        providers:[
-          BlocProvider(
-            create: ((context) =>
-              AuthenticationBloc()
-              ))],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-
-      themeMode: currentThemeMode == ThemeModeOption.dark
-          ? ThemeMode.dark
-          : ThemeMode.light,
-      theme: ThemeData(
-        textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Colors.black),
-          bodyText2: TextStyle(color: Colors.black),
-        ),
-      ),
-      darkTheme: ThemeData.dark(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomePage(),
-        '/admin': (context) => const AdminPage(),
-        '/other': (context)=> const ViewOtherNotesPage(),
-        '/login': (context) => const LoginPage(),
-        '/signup': (context) => const SignupPage(),
-        '/notes': (context) => const Notepage(),
-        '/adminLogin':(context) => const AdminLoginPage(),
-        '/adminNotes': (context) => AdminNotepage(
-            onNewNoteCreated: (note) {
-            },
-            currentIndex: 0,
+      providers: [
+        BlocProvider(create: ((context) => AuthenticationBloc())),
+        BlocProvider(create: (context) => SignupBloc())
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        themeMode: currentThemeMode == ThemeModeOption.dark
+            ? ThemeMode.dark
+            : ThemeMode.light,
+        theme: ThemeData(
+          textTheme: const TextTheme(
+            bodyText1: TextStyle(color: Colors.black),
+            bodyText2: TextStyle(color: Colors.black),
           ),
-        '/adminOthers':(context)=> const AdminOthersPage(),
-      },
+        ),
+        darkTheme: ThemeData.dark(),
+        initialRoute: '/signup',
+        routes: {
+          '/': (context) => const HomePage(),
+          '/admin': (context) => const AdminPage(),
+          '/other': (context) => const ViewOtherNotesPage(),
+          '/login': (context) => const LoginPage(),
+          '/signup': (context) => const SignupPage(),
+          '/notes': (context) => const Notepage(),
+          '/adminLogin': (context) => const AdminLoginPage(),
+          '/adminNotes': (context) => AdminNotepage(
+                onNewNoteCreated: (note) {},
+                currentIndex: 0,
+              ),
+          '/adminOthers': (context) => const AdminOthersPage(),
+        },
       ),
     );
   }
@@ -79,13 +77,14 @@ class MyAppState extends State<MyApp> {
       case ThemeModeOption.white:
         return ThemeData.light().copyWith(
           textTheme: ThemeData.light().textTheme.copyWith(
-        bodyText1: const TextStyle(fontFamily: 'Mate'),
-        bodyText2: const TextStyle(fontFamily: 'Mate'),
-          ),
+                bodyText1: const TextStyle(fontFamily: 'Mate'),
+                bodyText2: const TextStyle(fontFamily: 'Mate'),
+              ),
         );
       case ThemeModeOption.Sepia:
         return ThemeData.light().copyWith(
-          scaffoldBackgroundColor: const Color.fromARGB(255, 189, 148, 128), // Sepia color
+          scaffoldBackgroundColor:
+              const Color.fromARGB(255, 189, 148, 128), // Sepia color
           appBarTheme: const AppBarTheme(
             backgroundColor: Color.fromARGB(255, 189, 148, 128), // Sepia color
             titleTextStyle: TextStyle(color: Colors.grey, fontFamily: 'Mate'),
@@ -100,18 +99,19 @@ class MyAppState extends State<MyApp> {
             hintStyle: TextStyle(color: Colors.grey, fontFamily: 'Mate'),
           ),
           bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor:Color.fromARGB(255, 189, 148, 128), // Sepia color
+            backgroundColor: Color.fromARGB(255, 189, 148, 128), // Sepia color
             selectedItemColor: Colors.grey,
             unselectedItemColor: Colors.grey,
           ),
-          bottomAppBarTheme: const BottomAppBarTheme(color:Color.fromARGB(255, 189, 148, 128)), // Sepia color
+          bottomAppBarTheme: const BottomAppBarTheme(
+              color: Color.fromARGB(255, 189, 148, 128)), // Sepia color
         );
       case ThemeModeOption.dark:
         return ThemeData.dark().copyWith(
           textTheme: ThemeData.light().textTheme.copyWith(
-        bodyText1: const TextStyle(fontFamily: 'Mate'),
-        bodyText2: const TextStyle(fontFamily: 'Mate'),
-          ),
+                bodyText1: const TextStyle(fontFamily: 'Mate'),
+                bodyText2: const TextStyle(fontFamily: 'Mate'),
+              ),
         );
     }
   }
