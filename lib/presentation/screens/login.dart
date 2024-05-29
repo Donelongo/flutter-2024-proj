@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
         else if(state is AuthenticationDefault){
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushNamed(context, '/signup');
+        Navigator.pushNamed(context, '/home');
         return false;
       },
 
@@ -98,7 +98,7 @@ class LoginPage extends StatelessWidget {
                     PasswordWidget(passwordController: state.password),
                     const SizedBox(height: 20),
                     if (state.error == AuthenticationError.Input)
-                      const Text('Invvalid email or paswword',
+                      const Text('Invalid email or paswword',
                       style: TextStyle(color:Colors.red),),
                     ElevatedButton(
                       onPressed: () {

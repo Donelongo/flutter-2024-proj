@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../widgets/password.dart';
@@ -19,7 +21,12 @@ class SignupPage extends StatelessWidget {
 @override
 Widget build(BuildContext context) {
   final bloc = context.read<SignupBloc>();
-  return BlocConsumer<SignupBloc, SignupState>(
+  return WillPopScope(
+    onWillPop: () async {
+      Navigator.pushNamed(context, '/home');
+      return false;
+    },
+  child: BlocConsumer<SignupBloc, SignupState>(
       listener: (context, state) {
 
         if (state is SignupSuccess) {
@@ -35,6 +42,7 @@ Widget build(BuildContext context) {
         else if (state is SignupLoading){
           return loadingPage();
           }
+
         else if (state is SignupDefault) {
               return Scaffold(
                 appBar: AppBar(),
@@ -168,6 +176,7 @@ Widget build(BuildContext context) {
               );
             }
           },
-        );
+        ),
+  );
   }
 }

@@ -1,7 +1,9 @@
+// ignore_for_file: unused_element
+
+import 'package:digital_notebook/presentation/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import './add_activity_dialog.dart';
 import './adminOthers.dart';
-import './adminNotes.dart';
 import 'package:digital_notebook/models/note_model.dart';
 import 'package:digital_notebook/presentation/widgets/note_card.dart';
 
@@ -35,9 +37,32 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: const Text('Admin', style: TextStyle(fontSize: 25) ,),
+      // ),
       appBar: AppBar(
-        title: const Text('Admin', style: TextStyle(fontSize: 25) ,),
-      ),
+        automaticallyImplyLeading: false,
+        title: const Padding(
+          padding: EdgeInsets.only(left: 10),
+          child:  Text(
+            'Admin',
+            style: TextStyle(
+              fontSize: 28,
+            ),
+          ),
+        ),
+        actions: const <Widget>[
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Center(
+                  child: CircleAvatarWidget(key: Key('avatar'), routeName: '/home',),
+                ),
+              ),
+            ),
+          ]
+        ),
       body: TabBarView(
         controller: _tabController,
         children: [
@@ -146,18 +171,18 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
       ),
       floatingActionButton: _tabController.index <= 1
     ? FloatingActionButton(
-        onPressed: () {
-          if (_tabController.index == 0) {
-            _showAddActivityDialog(context);
-          } else if (_tabController.index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => AdminNotepage(
-                        onNewNoteCreated: onNewNoteCreated,
-                        currentIndex: notes.length,
-                      )),
-            );
+        onPressed: () async {
+          final result = await Navigator.pushNamed(
+            context,
+            '/addNote'
+          );
+          debugPrint('i ahve arrivbed here111111111111111111');
+          debugPrint('$result');
+          if (result != null && result is Map) {
+            debugPrint('i ahve arrivbed here');
+            final title = result['noteTitle'];
+            final body = result['noteBody'];
+            debugPrint('$title, $body');
           }
         },
         backgroundColor: Colors.blueGrey,

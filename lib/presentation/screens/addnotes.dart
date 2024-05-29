@@ -1,6 +1,5 @@
 import 'package:digital_notebook/bloc/add_note_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './addnotes.dart';
 import 'package:digital_notebook/models/note_model.dart';
 import 'package:digital_notebook/presentation/widgets/note_card.dart';
 import '../widgets/avatar.dart';
@@ -42,23 +41,18 @@ void initState() {
             ),
           ),
         ),
-        actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/login');
-            },
-            child: const Padding(
+        actions: const <Widget>[
+          Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Center(
-                  child: CircleAvatarWidget(key: Key('avatar')),
+                  child: CircleAvatarWidget(key: Key('avatar'), routeName: '/login',),
                 ),
               ),
             ),
+          ]
           ),
-        ],
-      ),
       body: TabBarView(
         controller: _tabController,
         children: [

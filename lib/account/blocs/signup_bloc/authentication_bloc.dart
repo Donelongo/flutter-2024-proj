@@ -1,5 +1,5 @@
 // authentication_bloc.dart
-// ignore_for_file: depend_on_referenced_packages, unrelated_type_equality_checks
+// ignore_for_file: depend_on_referenced_packages, unrelated_type_equality_checks, unused_element
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

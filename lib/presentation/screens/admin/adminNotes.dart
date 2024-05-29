@@ -1,30 +1,27 @@
-
-// ignore_for_file: file_names
-
+import 'package:digital_notebook/bloc/add_note_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:digital_notebook/models/note_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AdminNotepage extends StatefulWidget {
-  const AdminNotepage({super.key, required this.onNewNoteCreated, required this.currentIndex});
 
-  final Function(Note) onNewNoteCreated;
-  final int currentIndex;
+class AdminNotepage extends StatelessWidget {
 
-  @override
-  State<AdminNotepage> createState() => AdminNotepageState();
-}
-
-class AdminNotepageState extends State<AdminNotepage> {
-  final titleController = TextEditingController();
-  final bodyController = TextEditingController();
+  const AdminNotepage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final bloc = context.watch<AddNoteBloc>();
+    final state = bloc.state;
+    if (state is AddNoteInitial){
+      bloc.add(InitialEvent());
+      return const Scaffold();
+    }
+    else if(state is AddNoteDefault)
+    {
+      return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Add Note',
-          style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w300),
         ),
       ),
       body: Padding(
@@ -32,7 +29,7 @@ class AdminNotepageState extends State<AdminNotepage> {
         child: Column(
           children: [
             TextFormField(
-              controller: titleController,
+              controller: state.titleController,
               style: const TextStyle(fontSize: 26, color: Colors.black, fontWeight: FontWeight.bold),
               decoration: const InputDecoration(
                 border: InputBorder.none,
@@ -42,7 +39,7 @@ class AdminNotepageState extends State<AdminNotepage> {
             ),
             const SizedBox(height: 10),
             TextFormField(
-              controller: bodyController,
+              controller: state.bodyController,
               style: const TextStyle(fontSize: 18, color: Colors.black),
               decoration: const InputDecoration(
                 border: InputBorder.none,
@@ -52,19 +49,24 @@ class AdminNotepageState extends State<AdminNotepage> {
             ),
           ElevatedButton(
               onPressed: () {
-                final note = Note(
-                  title: titleController.text,
-                  body: bodyController.text,
-                  index: widget.currentIndex,
-                );
-                widget.onNewNoteCreated(note);
-                Navigator.pop(context);
+                Navigator.pop(context, {
+                  'noteTitle':state.titleController.text,
+                  'noteBody':state.bodyController.text
+                });
+                bloc.add(InitialEvent());
               },
               child: const Text('Save Note'),
             ),
           ]
         ),
       ),
-    );
+    );}
+    else{
+      return Scaffold(
+        body: Center(
+          child: Text('Unimplemented state $state'),
+          )
+      );
+    }
   }
 }

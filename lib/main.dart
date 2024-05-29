@@ -56,18 +56,18 @@ class MyAppState extends State<MyApp> {
           ),
         ),
         darkTheme: ThemeData.dark(),
-        initialRoute: '/',
+        initialRoute: '/home',
         routes: {
-          '/': (context) => const HomePage(),
+          '/home': (context) => const HomePage(),
           '/admin': (context) => const AdminPage(),
           '/other': (context) => const ViewOtherNotesPage(),
           '/login': (context) => const LoginPage(),
           '/signup': (context) => const SignupPage(),
           '/notes': (context) => const Notepage(),
           '/adminLogin': (context) => const AdminLoginPage(),
-          '/adminNotes': (context) => AdminNotepage(
-                onNewNoteCreated: (note) {},
-                currentIndex: 0,
+          '/adminNotes': (context) => const AdminNotepage(
+                // onNewNoteCreated: (note) {},
+                // currentIndex: 0,
               ),
           '/adminOthers': (context) => const AdminOthersPage(),
           '/addNote': (context) => const AddNote(),
