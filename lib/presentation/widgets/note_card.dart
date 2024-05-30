@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/note_view.dart';
 
 class NotesCard extends StatelessWidget {
-  const NotesCard(
-      {super.key,
-      required this.note,
-      required this.index,
-      required this.onNoteDeleted,
-      required this.onNoteEdited,
-      required this.deleteNote,
-      required this.onDataRecieved,
-      });
+  const NotesCard({
+    super.key,
+    required this.note,
+    required this.index,
+    required this.onNoteDeleted,
+    required this.onNoteEdited,
+    required this.deleteNote,
+    required this.onDataRecieved,
+  });
 
   final Note note;
   final int index;
@@ -34,9 +34,9 @@ class NotesCard extends StatelessWidget {
             ),
           ),
         );
-        if (result != null && result is Map){
+        if (result != null && result is Map) {
           Map<String, String> data = result as Map<String, String>;
-          onDataRecieved (data);
+          onDataRecieved(data);
         }
       },
       child: Card(
@@ -65,7 +65,12 @@ class NotesCard extends StatelessWidget {
                   ),
                 ],
               ),
-              IconButton(onPressed: deleteNote, icon: const Icon(Icons.remove))
+              const Spacer(),
+              IconButton(
+                onPressed: deleteNote,
+                icon: const Icon(Icons.delete),
+                color: Colors.red,
+              )
             ],
           ),
         ),

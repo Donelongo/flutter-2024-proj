@@ -39,35 +39,6 @@ class NoteView extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                          backgroundColor: Colors.grey[900],
-                          title: const Text(
-                            "Delete Note ?",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                          content: Text(
-                            "Note '${state.titleController.text}' will be deleted!",
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text("Cancel"),
-                            ),
-                          ]);
-                    });
-              },
-            ),
-            IconButton(
               icon: const Icon(Icons.save),
               onPressed: () {
                 Navigator.pop(context, {
