@@ -2,6 +2,8 @@
 import 'package:digital_notebook/account/blocs/signup_bloc/authentication_bloc.dart';
 import 'package:digital_notebook/account/blocs/signup_bloc/signup_bloc/signup_bloc.dart';
 import 'package:digital_notebook/bloc/add_note_bloc.dart';
+import 'package:digital_notebook/bloc/note_view_bloc.dart';
+import 'package:digital_notebook/bloc/notes_bloc.dart';
 import 'package:digital_notebook/presentation/screens/addnotes.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/home.dart';
@@ -43,6 +45,9 @@ class MyAppState extends State<MyApp> {
         BlocProvider(create: ((context) => AuthenticationBloc())),
         BlocProvider(create: (context) => SignupBloc()),
         BlocProvider(create: (context) => AddNoteBloc()),
+        BlocProvider(create: (context) => NotesBloc()),
+        BlocProvider(create: (context) => NoteViewBloc()),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -56,7 +61,7 @@ class MyAppState extends State<MyApp> {
           ),
         ),
         darkTheme: ThemeData.dark(),
-        initialRoute: '/home',
+        initialRoute: '/notes',
         routes: {
           '/home': (context) => const HomePage(),
           '/admin': (context) => const AdminPage(),
@@ -65,10 +70,7 @@ class MyAppState extends State<MyApp> {
           '/signup': (context) => const SignupPage(),
           '/notes': (context) => const Notepage(),
           '/adminLogin': (context) => const AdminLoginPage(),
-          '/adminNotes': (context) => const AdminNotepage(
-                // onNewNoteCreated: (note) {},
-                // currentIndex: 0,
-              ),
+          '/adminNotes': (context) => const AdminNotepage(),
           '/adminOthers': (context) => const AdminOthersPage(),
           '/addNote': (context) => const AddNote(),
         },

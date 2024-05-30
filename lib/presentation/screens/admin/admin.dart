@@ -163,6 +163,10 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
                 index: index,
                 onNoteDeleted: onNoteDeleted,
                 onNoteEdited: onNoteEdited,
+                deleteNote: () {},
+                onDataRecieved: (data) {
+
+                },
               );
             },
           ),
@@ -226,7 +230,7 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
         name: activityName,
         date: '${dateTime.year}-${dateTime.month}-${dateTime.day}',
         time: '${dateTime.hour}:${dateTime.minute}',
-        logs: ['Added at ${DateTime.now()}'], 
+        logs: ['Added at ${DateTime.now()}'],
       ));
     });
   }
