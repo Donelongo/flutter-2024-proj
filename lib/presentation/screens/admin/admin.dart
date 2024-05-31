@@ -1,12 +1,11 @@
 // ignore_for_file: unused_element
-
+import 'package:digital_notebook/presentation/screens/admin/adminNotes.dart';
 import 'package:digital_notebook/presentation/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import './add_activity_dialog.dart';
 import './adminOthers.dart';
 import 'package:digital_notebook/models/note_model.dart';
 import 'package:digital_notebook/presentation/widgets/note_card.dart';
-
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -15,7 +14,8 @@ class AdminPage extends StatefulWidget {
   AdminPageState createState() => AdminPageState();
 }
 
-class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixin {
+class AdminPageState extends State<AdminPage>
+    with SingleTickerProviderStateMixin {
   List<Activity> activities = [];
   List<Note> notes = List.empty(growable: true);
   TextEditingController activityController = TextEditingController();
@@ -37,45 +37,45 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Admin', style: TextStyle(fontSize: 25) ,),
-      // ),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child:  Text(
-            'Admin',
-            style: TextStyle(
-              fontSize: 28,
+          automaticallyImplyLeading: false,
+          title: const Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              'Admin',
+              style: TextStyle(
+                fontSize: 28,
+              ),
             ),
           ),
-        ),
-        actions: const <Widget>[
-          Padding(
+          actions: const <Widget>[
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Center(
-                  child: CircleAvatarWidget(key: Key('avatar'), routeName: '/home',),
+                  child: CircleAvatarWidget(
+                    key: Key('avatar'),
+                    routeName: '/home',
+                  ),
                 ),
               ),
             ),
-          ]
-        ),
+          ]),
       body: TabBarView(
         controller: _tabController,
         children: [
-
           ListView.builder(
             itemCount: activities.length,
             itemBuilder: (BuildContext context, int index) {
+//...........................Activity log starts...............................
+
               return Column(
                 children: [
                   ListTile(
                     title: Text(activities[index].name),
                     subtitle: Text(
-                      'User: ${activities[index].user}, Date: ${activities[index].date}, Time: ${activities[index].time}'),
+                        'User: ${activities[index].user}, Date: ${activities[index].date}, Time: ${activities[index].time}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -86,43 +86,42 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
                           },
                         ),
                         IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: Colors.grey[900],
-                    title: const Text("Delete Note ?",
-                    style: TextStyle(
-                      color:Colors.white,
-                    ),
-                    ),
-                    content: Text("Activity '${activities[index].user}' will be deleted!",
-                    style: const TextStyle(
-                      color: Colors.white
-                    ),
-                    ),
-                    actions:[
-                      TextButton(
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Cancel"),
-                      ),
-                      TextButton(
-                        onPressed: (){
-                          _deleteActivity(index);
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Delete"),
-                      ),
-                    ]
-                  );
-                }
-              );
-            },
-          ),
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      backgroundColor: Colors.grey[900],
+                                      title: const Text(
+                                        "Delete Note ?",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      content: Text(
+                                        "Activity '${activities[index].user}' will be deleted!",
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text("Cancel"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            _deleteActivity(index);
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text("Delete"),
+                                        ),
+                                      ]);
+                                });
+                          },
+                        ),
                         // IconButton(
                         //   icon: const Icon(Icons.delete),
                         //   onPressed: () {
@@ -155,7 +154,12 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
               );
             },
           ),
-        ListView.builder(
+
+//...........................Activity log Ends...............................
+
+          const AdminNotesPage(),
+
+          ListView.builder(
             itemCount: notes.length,
             itemBuilder: (BuildContext context, int index) {
               return NotesCard(
@@ -164,41 +168,45 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
                 onNoteDeleted: onNoteDeleted,
                 onNoteEdited: onNoteEdited,
                 deleteNote: () {},
-                onDataRecieved: (data) {
-
-                },
+                onDataRecieved: (data) {},
               );
             },
           ),
+
           const AdminOthersPage(),
         ],
       ),
-      floatingActionButton: _tabController.index <= 1
-    ? FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final result = await Navigator.pushNamed(
-            context,
-            '/addNote'
-          );
-          debugPrint('i ahve arrivbed here111111111111111111');
-          debugPrint('$result');
+          final result = await Navigator.pushNamed(context, '/addActivity');
           if (result != null && result is Map) {
-            debugPrint('i ahve arrivbed here');
-            final title = result['noteTitle'];
-            final body = result['noteBody'];
-            debugPrint('$title, $body');
+            debugPrint(
+                'Activity added: ${result['user']}, ${result['activity']}, ${result['dateTime']}');
           }
         },
         backgroundColor: Colors.blueGrey,
-        child: const Icon(Icons.add, color: Colors.white),
-      )
-    : null,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+
+
       bottomNavigationBar: TabBar(
-        controller: _tabController, 
+        controller: _tabController,
         tabs: const [
-          Tab(icon: Icon(Icons.history, color:Colors.blueGrey), text: 'History',), // Current page
-          Tab(icon: Icon(Icons.notes, color:Colors.blueGrey), text: 'Notes',), // Notes page
-          Tab(icon: Icon(Icons.people_alt, color:Colors.blueGrey), text: "Other's Notes",), // Other People page
+          Tab(
+            icon: Icon(Icons.history, color: Colors.blueGrey),
+            text: 'History',
+          ), // Current page
+          Tab(
+            icon: Icon(Icons.notes, color: Colors.blueGrey),
+            text: 'Notes',
+          ), // Notes page
+          Tab(
+            icon: Icon(Icons.people_alt, color: Colors.blueGrey),
+            text: "Other's Notes",
+          ), // Other People page
         ],
       ),
     );
@@ -246,20 +254,18 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
             children: [
               TextField(
                 controller: TextEditingController(text: activities[index].user),
-                decoration: const InputDecoration(
-                  labelText: 'User'
-                  ),
-                  style: const TextStyle(
-                    color: Colors.black,
+                decoration: const InputDecoration(labelText: 'User'),
+                style: const TextStyle(
+                  color: Colors.black,
                 ),
               ),
               TextField(
                 controller: TextEditingController(text: activities[index].name),
                 decoration: const InputDecoration(
                   labelText: 'Activity',
-                  ),
-                  style: const TextStyle(
-                    color: Colors.black,
+                ),
+                style: const TextStyle(
+                  color: Colors.black,
                 ),
               ),
             ],
@@ -268,7 +274,8 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _editActivity(index, userController.text, activityController.text);
+                _editActivity(
+                    index, userController.text, activityController.text);
               },
               child: const Text('Save'),
             ),
@@ -300,20 +307,22 @@ class AdminPageState extends State<AdminPage> with SingleTickerProviderStateMixi
       activities.removeAt(index);
     });
   }
-  void onNewNoteCreated(Note note){
-    notes.add(note);
-    setState((){});
-    }
 
-  void onNoteDeleted(int index){
+  void onNewNoteCreated(Note note) {
+    notes.add(note);
+    setState(() {});
+  }
+
+  void onNoteDeleted(int index) {
     notes.removeAt(index);
     setState(() {});
   }
+
   void onNoteEdited(Note note) {
-  notes[note.index].title = note.title;
-  notes[note.index].body = note.body;
-  setState(() {});
-}
+    notes[note.index].title = note.title;
+    notes[note.index].body = note.body;
+    setState(() {});
+  }
 }
 
 class Activity {
@@ -323,5 +332,10 @@ class Activity {
   String time;
   List<String> logs;
 
-  Activity({required this.user, required this.name, required this.date, required this.time, this.logs = const []});
+  Activity(
+      {required this.user,
+      required this.name,
+      required this.date,
+      required this.time,
+      this.logs = const []});
 }

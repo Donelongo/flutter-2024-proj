@@ -5,11 +5,13 @@ import 'package:digital_notebook/bloc/add_note_bloc.dart';
 import 'package:digital_notebook/bloc/note_view_bloc.dart';
 import 'package:digital_notebook/bloc/notes_bloc.dart';
 import 'package:digital_notebook/presentation/screens/addnotes.dart';
+import 'package:digital_notebook/presentation/screens/admin/add_activity_dialog.dart';
+import 'package:digital_notebook/presentation/screens/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:digital_notebook/presentation/screens/home.dart';
 import 'package:digital_notebook/presentation/screens/admin/admin.dart';
 import 'package:digital_notebook/presentation/screens/admin/adminLogin.dart';
-import 'package:digital_notebook/presentation/screens/admin/adminNotes.dart';
+import 'package:digital_notebook/presentation/screens/admin/adminAddNotes.dart';
 import 'package:digital_notebook/presentation/screens/admin/adminOthers.dart';
 import 'package:digital_notebook/presentation/screens/login.dart';
 import 'package:digital_notebook/presentation/screens/signup.dart';
@@ -61,7 +63,7 @@ class MyAppState extends State<MyApp> {
           ),
         ),
         darkTheme: ThemeData.dark(),
-        initialRoute: '/notes',
+        initialRoute: '/admin',
         routes: {
           '/home': (context) => const HomePage(),
           '/admin': (context) => const AdminPage(),
@@ -70,9 +72,11 @@ class MyAppState extends State<MyApp> {
           '/signup': (context) => const SignupPage(),
           '/notes': (context) => const Notepage(),
           '/adminLogin': (context) => const AdminLoginPage(),
-          '/adminNotes': (context) => const AdminNotepage(),
+          '/adminAddNotes': (context) => const AdminAddNotepage(),
           '/adminOthers': (context) => const AdminOthersPage(),
           '/addNote': (context) => const AddNote(),
+          '/addActivity': (context) => AddActivityDialog.create(context),
+          '/updateProfile': (context) => UpdateProfilePage(),
         },
       ),
     );

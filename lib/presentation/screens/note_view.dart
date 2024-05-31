@@ -16,6 +16,7 @@ class NoteView extends StatelessWidget {
       required this.index,
       required this.onNoteEdited,
       required this.onNoteDeleted,
+      // ignore: non_constant_identifier_names
       required Function(int p1, String p2, String p3) Function});
 
   @override
